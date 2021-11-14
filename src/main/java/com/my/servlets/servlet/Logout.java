@@ -21,12 +21,13 @@ public class Logout extends HttpServlet {
 
         final HttpSession session = req.getSession();
 
-        session.removeAttribute("password");
-        session.removeAttribute("login");
+        //session.removeAttribute("password");
+        session.removeAttribute("email");
         session.removeAttribute("isAdmin");
 
-       // resp.sendRedirect(super.getServletContext().getContextPath());
-        resp.sendRedirect("login.jsp");
+        resp.sendRedirect(super.getServletContext().getContextPath());
+       // resp.sendRedirect("login.jsp");
+        // resp.sendRedirect("/");
     }
 
 }

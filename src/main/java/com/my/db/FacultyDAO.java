@@ -28,6 +28,7 @@ public class FacultyDAO {
             while (resultSet.next()){
                 Faculty faculty = new Faculty();
                 int id = resultSet.getInt(1);
+                faculty.setId(id);
                 //faculty.setName(resultSet.getString(1));
                 prSt1.setInt(1,id);
                 prSt1.setInt(2,langId);

@@ -1,13 +1,17 @@
 package com.my.servlets.filter;
 
 import com.my.db.UserDAO;
+import com.my.db.entity.User;
+import com.my.model.Password;
 
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 
 import static java.util.Objects.nonNull;
@@ -15,6 +19,7 @@ import static java.util.Objects.nonNull;
 /**
  * Acidification filter.
  */
+@WebFilter("/*")
 public class AuOuFilter implements Filter {
 
     @Override
@@ -32,36 +37,44 @@ public class AuOuFilter implements Filter {
         final HttpServletResponse res = (HttpServletResponse) response;
 
         final String login = req.getParameter("email");
-        final String password = req.getParameter("password");
-
-
+        String passwordTemp = req.getParameter("password");
+        String password = "";
+        try {
+            if(passwordTemp!=null)
+                password = Password.hash(passwordTemp);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         final Connection conn = (Connection) req.getServletContext().getAttribute("conn");
 
         final HttpSession session = req.getSession();
 
         //Logged user.
         if (nonNull(session) &&
-            nonNull(session.getAttribute("email")) &&
-            nonNull(session.getAttribute("password"))) {
+            nonNull(session.getAttribute("email"))
+            //&& nonNull(session.getAttribute("password"))
+        ) {
 
             final int isAdmin = (int) session.getAttribute("isAdmin");
             System.out.println(isAdmin+"l");
-           // moveToMenu(req, res, isAdmin);
+           // moveTo(req, res, isAdmin);
             chain.doFilter(request, response);
 
         } else if (new UserDAO().ifUserExist(conn,login, password)) {
 
-            final int isAdmin = new UserDAO().getUser(conn,login, password).getIsAdmin();
+            User us = new UserDAO().getUser(conn,login, password);
+            final int isAdmin = us.getIsAdmin();
+            final int id = us.getId();
             System.out.println(isAdmin+"iex");
-            req.getSession().setAttribute("password", password);
+            //req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("email", login);
             req.getSession().setAttribute("isAdmin", isAdmin);
-
-            moveToMenu(req, res, isAdmin);
+            req.getSession().setAttribute("id", id);
+            moveTo(req, res, isAdmin);
 
         } else {
             System.out.println(-1);
-            moveToMenu(req, res, -1);
+            moveTo(req, res, -1);
         }
     }
 
@@ -70,9 +83,9 @@ public class AuOuFilter implements Filter {
      * If access 'admin' move to admin menu.
      * If access 'abiturient' move to user menu.
      */
-    private void moveToMenu(final HttpServletRequest req,
-                            final HttpServletResponse res,
-                            final int isAdmin)
+    private void moveTo(final HttpServletRequest req,
+                        final HttpServletResponse res,
+                        final int isAdmin)
             throws ServletException, IOException {
 
 

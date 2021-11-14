@@ -1,6 +1,7 @@
 package com.my.db.entity;
 
 public class Faculty {
+    int id;
     String name;
     int stFundedPlaces;
     int totPlaces;
@@ -15,6 +16,14 @@ public class Faculty {
                 ", stFundedPlaces=" + stFundedPlaces +
                 ", totPlaces=" + totPlaces +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

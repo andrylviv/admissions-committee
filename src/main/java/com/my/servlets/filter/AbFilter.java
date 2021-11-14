@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
  * Acidification filter.
  */
 
-@WebFilter(urlPatterns = { "/test" })
+@WebFilter(urlPatterns = { "/test","/tgu" })
 public class AbFilter implements Filter {
 
     @Override
@@ -35,15 +35,21 @@ public class AbFilter implements Filter {
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
         final HttpSession session = req.getSession();
-        final int isAdmin = (int) session.getAttribute("isAdmin");
+        int isAdmin = -1;
+        if (nonNull(session)&&nonNull(session.getAttribute("isAdmin")))
+         isAdmin = (int) session.getAttribute("isAdmin");
 
         if (isAdmin==0) {
-
             System.out.println(isAdmin+"inabf");
 
         req.getRequestDispatcher("err.jsp").forward(req, res);
-
         }
+        if (isAdmin==-1) {
+            System.out.println(isAdmin+"inabf");
+
+            req.getRequestDispatcher("login.jsp").forward(req, res);
+        }
+        chain.doFilter(request, response);
     }
     @Override
     public void destroy() {

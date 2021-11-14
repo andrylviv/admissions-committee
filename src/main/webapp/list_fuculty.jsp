@@ -17,7 +17,12 @@
             <td><c:out value="${ faculties.name }" /></td>
             <td><c:out value="${ faculties.stFundedPlaces }" /></td>
             <td><c:out value="${ faculties.totPlaces }" /></td>
-            <td><a href="<c:url value='/logout' />">register</a></td>
+            <td><a href="<c:url value='/reg_fty' >
+                            <c:param name="id" value="${faculties.id}"/>
+                            <c:param name="name" value="${faculties.name}"/>
+                         </c:url>
+            ">register</a>
+            </td>
         </tr>
     </c:forEach>
 </table>
