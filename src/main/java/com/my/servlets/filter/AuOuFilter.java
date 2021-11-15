@@ -49,6 +49,10 @@ public class AuOuFilter implements Filter {
 
         final HttpSession session = req.getSession();
 
+        if (req.getServletPath().equals("/reg_abiturient.jsp")){
+            req.getRequestDispatcher("reg_abiturient.jsp").forward(request, response);
+        }
+
         //Logged user.
         if (nonNull(session) &&
             nonNull(session.getAttribute("email"))

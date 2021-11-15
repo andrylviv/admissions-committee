@@ -13,16 +13,18 @@
 
 </head>
 <body>
-
 <div class="form">
-
     <h1>Вхід в систему</h1><br>
     <form method="post" action="">
-
-        <input type="text" required placeholder="email" name="email"><br>
-        <input type="password" required placeholder="password" name="password"><br><br>
+        <label for="email">email:</label><br>
+        <input type="text" id="email" required placeholder="email" name="email"><br>
+        <label for="password">password:</label><br>
+        <input type="password" id="password" required placeholder="password" name="password"><br><br>
         <input class="button" type="submit" value="Увійти">
-        <input class="button" type="submit" value="Реєстрація">
+      <!--  <input class="button" type="submit" value="Реєстрація">  -->
+    </form>
+    <form action="reg_abiturient.jsp">
+        <input type="submit" value="Реєстрація">
     </form>
 </div>
 </body>
