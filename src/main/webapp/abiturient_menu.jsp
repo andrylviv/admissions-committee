@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h1>Hello ABITURIENT!</h1>
+<h2>Hello ABITURIENT ${sessionScope.name}!</h2>
 <a href="<c:url value="/list"/>">Faculty List</a>
 <a href="<c:url value="/logout"/>">Logout</a>
 </body>

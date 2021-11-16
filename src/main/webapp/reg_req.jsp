@@ -1,20 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: andry
-  Date: 13.11.2021
-  Time: 2:07
+  Date: 03.11.2021
+  Time: 22:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
-    <title>ADMIN</title>
+    <title>Title</title>
 </head>
 <body>
 
-<h2>Hello ADMIN!</h2>
-<a href="<c:url value='/logout' />">Logout</a>
+     ${sessionScope.abitName}
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.my.servlets.filter;
 
 import com.my.db.UserDAO;
+import com.my.db.UserInfoDAO;
 import com.my.db.entity.User;
 import com.my.model.Password;
 
@@ -29,14 +30,13 @@ public class AuOuFilter implements Filter {
     @Override
     public void doFilter(final ServletRequest request,
                          final ServletResponse response,
-                         final FilterChain chain)
+                         final FilterChain chain) throws IOException, ServletException {
 
-            throws IOException, ServletException {
-
+        request.setCharacterEncoding("UTF-8");
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
-        final String login = req.getParameter("email");
+        final String email = req.getParameter("email");
         String passwordTemp = req.getParameter("password");
         String password = "";
         try {
@@ -50,7 +50,20 @@ public class AuOuFilter implements Filter {
         final HttpSession session = req.getSession();
 
         if (req.getServletPath().equals("/reg_abiturient.jsp")){
-            req.getRequestDispatcher("reg_abiturient.jsp").forward(request, response);
+           // req.getRequestDispatcher("reg_abiturient.jsp").forward(request, response);
+
+           /* session.removeAttribute("email");
+            session.removeAttribute("isAdmin");*/
+            chain.doFilter(request, response);
+        }
+       /* System.out.println(req.getServletPath());
+        System.out.println(req.getRequestURL());
+        System.out.println(req.getServletPath());*/
+        if (req.getServletPath().equals("/reg_abiturient")){
+
+           /* session.removeAttribute("email");
+            session.removeAttribute("isAdmin");*/
+            req.getRequestDispatcher("reg_abiturient").forward(request, response);
         }
 
         //Logged user.
@@ -64,20 +77,31 @@ public class AuOuFilter implements Filter {
            // moveTo(req, res, isAdmin);
             chain.doFilter(request, response);
 
-        } else if (new UserDAO().ifUserExist(conn,login, password)) {
+        } else if (new UserDAO().ifUserExist(conn,email, password)) {
 
-            User us = new UserDAO().getUser(conn,login, password);
+            User us = new UserDAO().getUser(conn,email, password);
             final int isAdmin = us.getIsAdmin();
             final int id = us.getId();
+
+            String name = new UserInfoDAO().getUserName(conn,id);
             System.out.println(isAdmin+"iex");
             //req.getSession().setAttribute("password", password);
-            req.getSession().setAttribute("email", login);
+            req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("isAdmin", isAdmin);
             req.getSession().setAttribute("id", id);
-            moveTo(req, res, isAdmin);
+            req.getSession().setAttribute("name", name);
 
-        } else {
-            System.out.println(-1);
+           /* if (req.getServletPath().equals("/reg_abiturient")){
+                req.getRequestDispatcher("reg_abiturient").forward(request, response);// after registr for PRG work
+            }*/
+            if(!response.isCommitted())
+            {
+                moveTo(req, res, isAdmin);
+            }
+
+
+        } else if (!req.getServletPath().equals("/reg_abiturient")&&!req.getServletPath().equals("/reg_abiturient.jsp")){
+            System.out.println(-1+"aouf");
             moveTo(req, res, -1);
         }
     }
@@ -103,10 +127,10 @@ public class AuOuFilter implements Filter {
 
         } else {
 
+            System.out.println("in-1");
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
     }
-
 
     @Override
     public void destroy() {

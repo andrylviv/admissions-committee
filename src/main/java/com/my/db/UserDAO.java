@@ -1,7 +1,10 @@
 package com.my.db;
 
 import com.my.db.entity.User;
+import com.my.model.Password;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +12,25 @@ import java.util.List;
 import static com.my.db.DBManager.getConnection;
 
 public class UserDAO {
-    public void  insertUser(User user){
-        try (Connection conn  = getConnection();
-             PreparedStatement stat = conn.prepareStatement("INSERT INTO user(email,is_admin,password) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS)){
+
+    public static final String INSERT_USER = "INSERT INTO user(email,is_admin,password) VALUES (?,?,?)";
+    public static final String GET_USER = "SELECT * FROM user WHERE email=?and password=?";
+    public static final String USER_EXIST = "SELECT * FROM user WHERE email=?and password=?";
+
+    public void  insertUser(Connection conn,User user){
+        try (//Connection conn  = getConnection();
+             PreparedStatement stat = conn.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)){
 
             stat.setString(1,user.getEmail());
             stat.setString(2,String.valueOf(user.getIsAdmin()));
-            stat.setString(3,user.getPassword());
+            stat.setString(3,Password.hash(user.getPassword()));
             stat.executeUpdate();
             try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     user.setId(generatedKeys.getInt(1));
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
             //add logger
         }
     }
@@ -50,7 +58,7 @@ public class UserDAO {
     public User  getUser(Connection conn,String em,String pass){
         User us = new User();
         try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement("SELECT * FROM user WHERE email=?and password=?")) {
+            PreparedStatement stat = conn.prepareStatement(GET_USER)) {
 
             stat.setString(1,em);
             stat.setString(2,pass);
@@ -71,7 +79,7 @@ public class UserDAO {
     public boolean  ifUserExist(Connection conn,String em,String pass){
         User us = new User();
         try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement("SELECT * FROM user WHERE email=?and password=?")) {
+            PreparedStatement stat = conn.prepareStatement(USER_EXIST)) {
 
             stat.setString(1,em);
             stat.setString(2,pass);

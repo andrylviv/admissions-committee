@@ -15,7 +15,7 @@ public class RegFtyServ extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId = (int)req.getSession().getAttribute("id");
-        String userName = (String) req.getSession().getAttribute("email");
+        String userName = (String) req.getSession().getAttribute("name");
         String idJsp = req.getParameter("id");
         String nameJsp = req.getParameter("name");
         RegAbitFlty.regUserFlty(userId,Integer.valueOf(idJsp));
