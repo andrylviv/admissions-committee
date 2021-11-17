@@ -3,14 +3,15 @@ package com.my.db;
 import com.my.db.entity.User;
 import com.my.db.entity.UserInfo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.my.db.DBManager.getConnection;
 
 public class UserInfoDAO {
     public static final String GET_USER_NAME = "SELECT * FROM user_info WHERE user_id=?";
+    public static final String GET_USER_INFO = "SELECT * FROM user_info";
     public static final String INSERT_USER_INFO = "INSERT INTO user_info (first_name, last_name, patronymic, city, region, school, uk_lang, uk_liter, eng, algebra, informatics, geometry, uk_history, ph_training, physics, eie_uk_lang, eie_math,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     public void  insertUserInf(Connection conn,User user, UserInfo userInfo){
@@ -45,6 +46,45 @@ public class UserInfoDAO {
         } catch (SQLException e) {
             //add logger
         }
+    }
+
+    public List<UserInfo> getUserInf(Connection conn){
+
+        List<UserInfo> userList = new ArrayList<>();
+
+        try(//Connection conn = getConnection();
+            Statement stat=conn.createStatement()) {
+
+            ResultSet resultSet=stat.executeQuery(GET_USER_INFO);
+
+            while (resultSet.next()) {
+                UserInfo userInfo = new UserInfo();
+                userInfo.setId(resultSet.getInt(1));
+                userInfo.setFirstName(resultSet.getString(2));
+                userInfo.setLastName(resultSet.getString(3));
+                userInfo.setPartonymic(resultSet.getString(4));
+                userInfo.setCity(resultSet.getString(5));
+                userInfo.setRegion(resultSet.getString(6));
+                userInfo.setSchool(resultSet.getString(7));
+                userInfo.setUkLang(resultSet.getInt(8));
+                userInfo.setUkLiter(resultSet.getInt(9));
+                userInfo.setEng(resultSet.getInt(10));
+                userInfo.setAlgebra(resultSet.getInt(11));
+                userInfo.setInformatics(resultSet.getInt(12));
+                userInfo.setGeometry(resultSet.getInt(13));
+                userInfo.setUkHistory(resultSet.getInt(14));
+                userInfo.setPhTraining(resultSet.getInt(15));
+                userInfo.setPhysics(resultSet.getInt(16));
+                userInfo.setEieUkLang(resultSet.getInt(17));
+                userInfo.setEieMath(resultSet.getInt(18));
+                userInfo.setUserId(resultSet.getInt(19));
+                userList.add(userInfo);
+            }
+
+        } catch (SQLException e) {
+            //add logger
+        }
+        return userList;
     }
 
     public String  getUserName(Connection conn,int id){

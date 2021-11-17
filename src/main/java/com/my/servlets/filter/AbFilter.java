@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
  * Acidification filter.
  */
 
-//@WebFilter(urlPatterns = { "/reg_abiturient","/reg_abiturient.jsp" })
+@WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp" })
 public class AbFilter implements Filter {
 
     @Override
@@ -41,7 +41,7 @@ public class AbFilter implements Filter {
 
         if (isAdmin==0) {
             System.out.println(isAdmin+"inabf");
-
+            System.out.println(req.getHeader("Referer"));
         req.getRequestDispatcher("err.jsp").forward(req, res);
         }
         if (isAdmin==-1) {

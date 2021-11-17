@@ -16,6 +16,7 @@ public class UserDAO {
     public static final String INSERT_USER = "INSERT INTO user(email,is_admin,password) VALUES (?,?,?)";
     public static final String GET_USER = "SELECT * FROM user WHERE email=?and password=?";
     public static final String USER_EXIST = "SELECT * FROM user WHERE email=?and password=?";
+    public static final String GET_ALL_USERS = "SELECT * FROM user WHERE is_admin=0";
 
     public void  insertUser(Connection conn,User user){
         try (//Connection conn  = getConnection();
@@ -38,7 +39,7 @@ public class UserDAO {
     public List<User> findAllUsers(){
         List<User> userList = new ArrayList<>();
         try(Connection conn = getConnection();
-            Statement stat=conn.createStatement();ResultSet resultSet=stat.executeQuery("SELECT * FROM user WHERE is_admin=0")) {
+            Statement stat=conn.createStatement();ResultSet resultSet=stat.executeQuery(GET_ALL_USERS)) {
 
             while (resultSet.next()){
                 User user = new User();

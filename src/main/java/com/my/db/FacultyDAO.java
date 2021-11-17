@@ -9,12 +9,16 @@ import java.util.List;
 import static com.my.db.DBManager.getConnection;
 
 public class FacultyDAO {
+    public static final String GET_FACULTY = "SELECT * FROM faculty";
+    public static final String GET_LANGUAGE_ID = "SELECT id FROM language where language=?";
+    public static final String GET_FACULTY_NAME = "SELECT faculty_name FROM faculty_translate where faculty_id=? and language_id=?";
+
     public List<Faculty> findAllFaculty(Connection conn,String lang){
         List<Faculty> teamList = new ArrayList<>();
         try(//Connection conn = getConnection();
             Statement stat=conn.createStatement();
-            ResultSet resultSet=stat.executeQuery("SELECT * FROM faculty");
-            PreparedStatement prSt = conn.prepareStatement("SELECT id FROM language where language=?")) {
+            ResultSet resultSet=stat.executeQuery(GET_FACULTY);
+            PreparedStatement prSt = conn.prepareStatement(GET_LANGUAGE_ID)) {
             prSt.setString(1,lang);
             int langId = 0;
             try(ResultSet resSet = prSt.executeQuery()) {
@@ -23,7 +27,7 @@ public class FacultyDAO {
                 }
             }
 
-            PreparedStatement prSt1 = conn.prepareStatement("SELECT faculty_name FROM faculty_translate where faculty_id=? and language_id=?");
+            PreparedStatement prSt1 = conn.prepareStatement(GET_FACULTY_NAME);
 
             while (resultSet.next()){
                 Faculty faculty = new Faculty();
