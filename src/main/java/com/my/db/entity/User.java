@@ -5,7 +5,7 @@ public class User {
     private String email;
     private String password;
     private int isAdmin;
-    //private int userInfoId;
+    private int isBlocked;
 
     public User() {
     }
@@ -42,12 +42,12 @@ public class User {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
-   /* public int getUserInfoId() {
-        return userInfoId;
+
+    public int getIsBlocked() {
+        return isBlocked;
     }
 
-    public void setUserInfoId(int userInfoId) {
-        this.userInfoId = userInfoId;
+    public void setIsBlocked(int isBlocked) {
+        this.isBlocked = isBlocked;
     }
-*/
 }

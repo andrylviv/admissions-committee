@@ -82,6 +82,7 @@ public class AuOuFilter implements Filter {
             User us = new UserDAO().getUser(conn,email, password);
             final int isAdmin = us.getIsAdmin();
             final int id = us.getId();
+            final int isBlocked = us.getIsBlocked();
 
             String name = new UserInfoDAO().getUserName(conn,id);
             System.out.println(isAdmin+"iex");
@@ -90,6 +91,7 @@ public class AuOuFilter implements Filter {
             req.getSession().setAttribute("isAdmin", isAdmin);
             req.getSession().setAttribute("id", id);
             req.getSession().setAttribute("name", name);
+            req.getSession().setAttribute("isBlocked", isBlocked);
 
            /* if (req.getServletPath().equals("/reg_abiturient")){
                 req.getRequestDispatcher("reg_abiturient").forward(request, response);// after registr for PRG work

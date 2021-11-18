@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
  * Administrator filter.
  */
 
-@WebFilter(urlPatterns = { "/list" })
+//@WebFilter(urlPatterns = { "/list" })
 public class AdmFilter implements Filter {
 
     @Override

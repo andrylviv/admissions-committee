@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/list_user")
@@ -29,6 +30,11 @@ public class ListUserServ extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
         final Connection conn = (Connection) req.getServletContext().getAttribute("conn");
         List<UserInfo> usersInfo = new UserInfoDAO().getUserInf(conn);
+        /*try {
+            conn.close();
+        } catch (SQLException e) {//refactor
+            e.printStackTrace();
+        }*/
         req.setAttribute("usersInfo", usersInfo);
         req.getRequestDispatcher("list_user.jsp").forward(req,resp);
 

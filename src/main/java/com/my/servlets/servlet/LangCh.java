@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-    @WebServlet("/lang_ch")
+    @WebServlet("/lang_ch")//not used
     public class LangCh extends HttpServlet {
 
         @Override

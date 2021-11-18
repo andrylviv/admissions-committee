@@ -70,6 +70,7 @@ public class UserDAO {
 
                     us.setIsAdmin(resultSet.getInt(3));
                     us.setPassword(resultSet.getString(4));
+                    us.setIsBlocked(resultSet.getInt(5));
                 }
             }
         } catch (SQLException e) {

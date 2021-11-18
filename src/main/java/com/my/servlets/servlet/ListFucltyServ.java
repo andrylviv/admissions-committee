@@ -1,7 +1,7 @@
 package com.my.servlets.servlet;
 
-import com.my.db.FacultyDAO;
 import com.my.db.entity.Faculty;
+import com.my.model.FacultyList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -19,19 +18,39 @@ import static java.util.Objects.nonNull;
 @WebServlet("/list")
 public class ListFucltyServ extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(ListFucltyServ.class);
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("langchange")) {
+            String lang = req.getParameter("lang");
+            String uriVal = req.getParameter("uriVal");
+            req.getSession().setAttribute("lang", lang);
+            List<Faculty> faculties = FacultyList.getFacultyList(lang);
+            req.getSession().setAttribute("faculties", faculties);
+            resp.sendRedirect(uriVal);
+        }
+        if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("sort")) {
+            String sortType = req.getParameter("sortType");
+            String uriVal = req.getParameter("uriVal");
+            req.getSession().setAttribute("faculties",FacultyList.sortFaculty((List<Faculty>)req.getSession().getAttribute("faculties"),sortType));
+            resp.sendRedirect(uriVal);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Test#doGetList");
+        System.out.println("list#doGetList");
 
         //logger.debug("Hello, servlet!");
         resp.setContentType("text/html; charset=UTF-8");
-        final Connection conn = (Connection) req.getServletContext().getAttribute("conn");
         String language = (String) req.getSession().getAttribute("lang");
         if (!nonNull(language))
             language = "uk";
-        List<Faculty> faculties = new FacultyDAO().findAllFaculty(conn, language);
-        req.setAttribute("faculties", faculties);
+        List<Faculty> faculties = (List<Faculty>)req.getSession().getAttribute("faculties");
+        if (!nonNull(faculties)) {
+            faculties = FacultyList.getFacultyList(language);
+            req.getSession().setAttribute("faculties", faculties);
+        }
         req.getRequestDispatcher("list_faculty.jsp").forward(req,resp);
-
     }
 }
