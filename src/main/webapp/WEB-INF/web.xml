@@ -48,10 +48,10 @@
 
   <context-param>
     <param-name>log4jContextName</param-name>
-    <param-value>mavWeb</param-value>
+    <param-value>admissions_committee</param-value>
   </context-param>
   <context-param>
     <param-name>log4jConfiguration</param-name>
-    <param-value>file:///mavWeb/log4j2.xml</param-value>
+    <param-value>file:///EPAM Java Autumn Program 2021/final_project/admissions_committee/log4j2.xml</param-value>
   </context-param>
 </web-app>

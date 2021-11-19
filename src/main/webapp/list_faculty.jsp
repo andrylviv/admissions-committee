@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>Core: forEach</title>
@@ -21,6 +22,9 @@
     </style>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "pagecontent" var = "lang"/>
+
 <div align="right">
     <form method="post" action="<c:url value='/list' ></c:url>">
         <label for="lang">Language:</label>
@@ -45,9 +49,9 @@
     </form>
     <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
     <c:if test="${ block eq '1' }">
-        <h5>you blocked</h5>
+        <h5>blocked</h5>
     </c:if>
-    <a href="<c:url value='/logout' />">Logout</a>
+    <a href="<c:url value='/logout' />"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </div>
 <hr>
 <table>

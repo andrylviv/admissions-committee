@@ -1,4 +1,17 @@
 
-N	java:S106"9Replace this use of System.out or System.err by a logger.(óÆı
-|
-java:S1989"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(õúÄéøÿÿÿÿ
+i
+java:S2441#"MMake "List" and its parameters serializable or don't store it in the session.(¯¼ş8ÁÁÏ€Ó/
+g
+java:S1192"JDefine a constant instead of duplicating this literal "faculties" 5 times.(ºğÔ‡8ÁÁÏ€Ó/
+j
+java:S2441"MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8•ˆÓ/
+u
+java:S1989"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8âœ÷Ò/
+j
+java:S24414"MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8´¢Ü€Ó/
+ƒ
+java:S19896"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(å²“òÿÿÿÿÿ8ËÊşöÒ/
+j
+java:S1192"HDefine a constant instead of duplicating this literal "command" 4 times.(ş“ı¥şÿÿÿÿ8¸¾£şÒ/
+u
+java:S1989$"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8¸¸ÿÒ/

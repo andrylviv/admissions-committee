@@ -26,11 +26,15 @@ public class ListFucltyServ extends HttpServlet {
             String uriVal = req.getParameter("uriVal");
             req.getSession().setAttribute("lang", lang);
             List<Faculty> faculties = FacultyList.getFacultyList(lang);
+            String sortType = (String) req.getSession().getAttribute("sortType");
+            if (nonNull(sortType))
+                FacultyList.sortFaculty(faculties,sortType);
             req.getSession().setAttribute("faculties", faculties);
             resp.sendRedirect(uriVal);
         }
         if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("sort")) {
             String sortType = req.getParameter("sortType");
+            req.getSession().setAttribute("sortType", sortType);
             String uriVal = req.getParameter("uriVal");
             req.getSession().setAttribute("faculties",FacultyList.sortFaculty((List<Faculty>)req.getSession().getAttribute("faculties"),sortType));
             resp.sendRedirect(uriVal);
@@ -39,13 +43,15 @@ public class ListFucltyServ extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("list#doGetList");
 
-        //logger.debug("Hello, servlet!");
+
+        logger.debug("");
         resp.setContentType("text/html; charset=UTF-8");
         String language = (String) req.getSession().getAttribute("lang");
-        if (!nonNull(language))
+        if (!nonNull(language)){
             language = "uk";
+            req.getSession().setAttribute("lang", language);
+        }
         List<Faculty> faculties = (List<Faculty>)req.getSession().getAttribute("faculties");
         if (!nonNull(faculties)) {
             faculties = FacultyList.getFacultyList(language);

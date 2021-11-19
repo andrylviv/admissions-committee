@@ -1288,7 +1288,7 @@ faculty_id</ColNames>
     </column>
     <column id="319" parent="288" name="is_blocked">
       <Position>5</Position>
-      <DataType>int|0s</DataType>
+      <DataType>tinyint(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="320" parent="288" name="email">
