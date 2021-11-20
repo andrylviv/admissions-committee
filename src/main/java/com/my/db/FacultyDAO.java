@@ -6,28 +6,41 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.my.db.DBManager.getConnection;
+import static java.util.Objects.nonNull;
+
 
 public class FacultyDAO {
     public static final String GET_FACULTY = "SELECT * FROM faculty";
     public static final String GET_LANGUAGE_ID = "SELECT id FROM language where language=?";
     public static final String GET_FACULTY_NAME = "SELECT faculty_name FROM faculty_translate where faculty_id=? and language_id=?";
+    public static final String UPDATE_FACULTY = "UPDATE faculty SET st_funded_places = ?, tot_places= ? WHERE id = ?";
+    public static final String UPDATE_FACULTY_TRANSLATE = "UPDATE faculty_translate SET faculty_name = ? WHERE faculty_id = ? and language_id =?";
+    public static final String INSERT_FACULTY = "INSERT INTO faculty(st_funded_places,tot_places) VALUES (?,?)";
+    public static final String INSERT_FACULTY_TRANSLATION = "INSERT INTO faculty_translate(faculty_id, faculty_name,language_id) VALUES (?,?,?)";
+
+    public int getLangId(Connection conn, String lang){
+        int langId = 0;
+        try {
+            PreparedStatement prSt1 = conn.prepareStatement(GET_LANGUAGE_ID);
+            prSt1.setString(1, lang);
+
+            ResultSet resSet = prSt1.executeQuery();
+                if (resSet.next()) {
+                    langId = resSet.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        return langId;
+        }
 
     public List<Faculty> findAllFaculty(Connection conn,String lang){
         List<Faculty> teamList = new ArrayList<>();
         try(//Connection conn = getConnection();
             Statement stat=conn.createStatement();
-            ResultSet resultSet=stat.executeQuery(GET_FACULTY);
-            PreparedStatement prSt = conn.prepareStatement(GET_LANGUAGE_ID)) {
-            prSt.setString(1,lang);
-            int langId = 0;
-            try(ResultSet resSet = prSt.executeQuery()) {
-                if(resSet.next()) {
-                    langId = resSet.getInt(1);
-                }
-            }
+            ResultSet resultSet=stat.executeQuery(GET_FACULTY)) {
 
-            PreparedStatement prSt1 = conn.prepareStatement(GET_FACULTY_NAME);
+            PreparedStatement prSt1 = conn.prepareStatement(GET_FACULTY_NAME);  //refactor
 
             while (resultSet.next()){
                 Faculty faculty = new Faculty();
@@ -35,13 +48,15 @@ public class FacultyDAO {
                 faculty.setId(id);
                 //faculty.setName(resultSet.getString(1));
                 prSt1.setInt(1,id);
-                prSt1.setInt(2,langId);
+                prSt1.setInt(2,getLangId(conn, lang));
                 ResultSet rsi = prSt1.executeQuery();
                 if(rsi.next()) {
                     faculty.setName(rsi.getString(1));
                 }
                 faculty.setStFundedPlaces(resultSet.getInt(2));
                 faculty.setTotPlaces(resultSet.getInt(3));
+                if (!nonNull(faculty.getName()))
+                    faculty.setName("add locale name");
                 teamList.add(faculty);
             }
 
@@ -51,4 +66,62 @@ public class FacultyDAO {
         }
         return teamList;
     }
+
+    public void updateFaculty(Connection conn,Faculty faculty) {
+
+        try {
+             PreparedStatement prSt = conn.prepareStatement(UPDATE_FACULTY) ;
+                prSt.setInt(1,faculty.getStFundedPlaces());
+                prSt.setInt(2,faculty.getTotPlaces());
+                prSt.setInt(3,faculty.getId());
+                prSt.executeUpdate();
+
+             prSt = conn.prepareStatement(UPDATE_FACULTY_TRANSLATE);
+                prSt.setString(1,faculty.getName());
+                prSt.setInt(2,faculty.getId());
+                prSt.setInt(3,getLangId(conn, faculty.getLangName()));
+                prSt.executeUpdate();
+
+        } catch (SQLException e) {
+            //add logger
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addFaculty(Connection conn,Faculty faculty) {
+        try {
+            PreparedStatement stat = conn.prepareStatement(INSERT_FACULTY, Statement.RETURN_GENERATED_KEYS);
+
+            stat.setInt(1,faculty.getStFundedPlaces());
+            stat.setInt(2,faculty.getTotPlaces());
+            stat.executeUpdate();
+            try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    faculty.setId(generatedKeys.getInt(1));
+                }
+            }
+
+        } catch (SQLException e) {
+            //add logger
+        }
+    }
+
+    public void addFacultyLocal(Connection conn,Faculty faculty) {
+        try {
+            PreparedStatement stat = conn.prepareStatement(INSERT_FACULTY_TRANSLATION);
+            stat.setInt(1,faculty.getId());
+            stat.setString(2,faculty.getName());
+            stat.setInt(3,getLangId(conn, faculty.getLangName()));
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            //add logger
+        }
+    }
+
 }

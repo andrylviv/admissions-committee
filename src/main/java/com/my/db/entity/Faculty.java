@@ -5,6 +5,7 @@ public class Faculty {
     String name;
     int stFundedPlaces;
     int totPlaces;
+    String langName;
 
     public Faculty() {
     }
@@ -48,5 +49,13 @@ public class Faculty {
 
     public void setTotPlaces(int totPlaces) {
         this.totPlaces = totPlaces;
+    }
+
+    public String getLangName() {
+        return langName;
+    }
+
+    public void setLangName(String langName) {
+        this.langName = langName;
     }
 }

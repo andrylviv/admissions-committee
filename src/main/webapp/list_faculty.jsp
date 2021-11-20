@@ -53,8 +53,23 @@
     </c:if>
     <a href="<c:url value='/logout' />"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </div>
+
 <hr>
+<div align="right">
+                <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                <c:if test="${ not empty user and user eq '1' }">
+                    <a href="<c:url value='edit_faculty.jsp' >
+                                <c:param name="command" value="add"/>
+                             </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/></a>
+                </c:if>
+</div>
+
 <table>
+    <tr>
+        <th>Faculty</th>
+        <th>St. fou. places</th>
+        <th>Total places</th>
+    </tr>
     <c:forEach var="faculties" items="${sessionScope.faculties}" varStatus="status">
         <tr>
 
@@ -71,15 +86,26 @@
                     </td>
 
                 </c:if>
-            <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-            <c:if test="${ not empty user and user eq '1' }">
-                <td><a href="<c:url value='' >
-                                <c:param name="id" value="${faculties.id}"/>
-                                <c:param name="name" value="${faculties.name}"/>
-                             </c:url>">edit faculty</a>
-                </td>
+                <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                <c:if test="${ not empty user and user eq '1' }">
+                    <td><a href="<c:url value='edit_faculty.jsp' >
+                                    <c:param name="id" value="${faculties.id}"/>
+                                    <c:param name="name" value="${faculties.name}"/>
+                                    <c:param name="command" value="edit"/>
+                                 </c:url>">edit faculty</a>
+                    </td>
 
-            </c:if>
+                </c:if>
+                <c:set var="name" value="${faculties.name}" scope="page"/>
+                <c:if test="${ not empty name and name eq 'add locale name' }">
+                    <td><a href="<c:url value='edit_faculty.jsp' >
+                                        <c:param name="id" value="${faculties.id}"/>
+                                 <%--   <c:param name="name" value="${faculties.name}"/>  --%>
+                                        <c:param name="command" value="addLocale"/>
+                                     </c:url>">add local name</a>
+                    </td>
+
+                </c:if>
         </tr>
     </c:forEach>
 </table>

@@ -56,7 +56,5 @@ G
 src/main/webapp/loc.jsp,b\d\bd95091b09ed8e2d39f929c277ae0e8d81a54bf4
 T
 $src/main/java/pagecontent.properties,e\2\e2492623eb4449c32cc19095e95da309af689eb0
-Z
-*src/main/java/pagecontent_ru_ru.properties,0\b\0bc3b59f5eb0fdb1e35ebf83ed24b143e07231e3
 I
 src/main/webapp/login.jsp,8\5\85ee523d01e5e19376db640e846c91bbcb0a1c22

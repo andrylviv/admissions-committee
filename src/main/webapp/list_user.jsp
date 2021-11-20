@@ -19,6 +19,12 @@
 </head>
 <body>
 <table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>Partonymic</th>
+    </tr>
     <c:forEach var="usersInfo" items="${usersInfo}" varStatus="status">
         <tr>
 
