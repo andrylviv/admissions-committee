@@ -32,9 +32,9 @@
             <td><c:out value="${ usersInfo.firstName }" /></td>
             <td><c:out value="${ usersInfo.lastName }" /></td>
             <td><c:out value="${ usersInfo.partonymic }" /></td>
-            <td><a href="<c:url value='' >
-                            <c:param name="UserId" value="${usersInfo.userId}"/>
-                            <c:param name="name" value="${users.email}"/>
+            <td><a href="<c:url value='list_user' >
+                            <c:param name="userId" value="${usersInfo.userId}"/>
+                            <c:param name="command" value="userInfo"/>
                          </c:url>
             ">applicant information</a>
             </td>

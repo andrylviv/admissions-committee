@@ -21,7 +21,9 @@
 <body>
 
 <h2>Hello ADMIN!</h2>
-<a href="<c:url value='/list_user' />">List of applicants</a>
+<a href="<c:url value='/list_user'>
+             <c:param name="command" value="lou"/>
+         </c:url>">List of applicants</a>
 <a href="<c:url value="/list"/>">Faculty List</a>
 <a href="<c:url value='/logout' />">Logout</a>
 </body>

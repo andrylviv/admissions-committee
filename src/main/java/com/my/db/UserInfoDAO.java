@@ -11,8 +11,9 @@ import static com.my.db.DBManager.getConnection;
 
 public class UserInfoDAO {
     public static final String GET_USER_NAME = "SELECT * FROM user_info WHERE user_id=?";
-    public static final String GET_USER_INFO = "SELECT * FROM user_info";
+    public static final String GET_USER_INFO_LIST = "SELECT * FROM user_info";
     public static final String INSERT_USER_INFO = "INSERT INTO user_info (first_name, last_name, patronymic, city, region, school, uk_lang, uk_liter, eng, algebra, informatics, geometry, uk_history, ph_training, physics, eie_uk_lang, eie_math,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public static final String GET_USER_INFO = "SELECT * FROM user_info WHERE user_id=?";
 
     public void  insertUserInf(Connection conn,User user, UserInfo userInfo){
         try(//Connection conn = getConnection();
@@ -48,14 +49,14 @@ public class UserInfoDAO {
         }
     }
 
-    public List<UserInfo> getUserInf(Connection conn){
+    public List<UserInfo> getUsersInf(Connection conn){
 
         List<UserInfo> userList = new ArrayList<>();
 
         try(//Connection conn = getConnection();
             Statement stat=conn.createStatement()) {
 
-            ResultSet resultSet=stat.executeQuery(GET_USER_INFO);
+            ResultSet resultSet=stat.executeQuery(GET_USER_INFO_LIST);
 
             while (resultSet.next()) {
                 UserInfo userInfo = new UserInfo();
@@ -85,6 +86,46 @@ public class UserInfoDAO {
             //add logger
         }
         return userList;
+    }
+
+    public UserInfo getUserInfo(Connection conn,int id){
+        UserInfo userInfo = new UserInfo();
+
+        try(//Connection conn = getConnection();
+            PreparedStatement stat = conn.prepareStatement(GET_USER_INFO);) {
+
+
+            stat.setInt(1,id);
+
+            try(ResultSet resultSet = stat.executeQuery()) {
+                while (resultSet.next()) {
+
+                    userInfo.setId(resultSet.getInt(1));
+                    userInfo.setFirstName(resultSet.getString(2));
+                    userInfo.setLastName(resultSet.getString(3));
+                    userInfo.setPartonymic(resultSet.getString(4));
+                    userInfo.setCity(resultSet.getString(5));
+                    userInfo.setRegion(resultSet.getString(6));
+                    userInfo.setSchool(resultSet.getString(7));
+                    userInfo.setUkLang(resultSet.getInt(8));
+                    userInfo.setUkLiter(resultSet.getInt(9));
+                    userInfo.setEng(resultSet.getInt(10));
+                    userInfo.setAlgebra(resultSet.getInt(11));
+                    userInfo.setInformatics(resultSet.getInt(12));
+                    userInfo.setGeometry(resultSet.getInt(13));
+                    userInfo.setUkHistory(resultSet.getInt(14));
+                    userInfo.setPhTraining(resultSet.getInt(15));
+                    userInfo.setPhysics(resultSet.getInt(16));
+                    userInfo.setEieUkLang(resultSet.getInt(17));
+                    userInfo.setEieMath(resultSet.getInt(18));
+                    userInfo.setUserId(resultSet.getInt(19));
+
+                }
+            }
+        } catch (SQLException e) {
+            //add logger
+        }
+        return userInfo;
     }
 
     public String  getUserName(Connection conn,int id){
