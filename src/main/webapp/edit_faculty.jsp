@@ -32,6 +32,12 @@
         <input type="hidden" id="nlang" name="lang" value="${sessionScope.lang}">
         <input type="hidden" id="nfacultyId" name="facultyId" value="${param.id}">
         <input type="hidden" id="ncommand" name="command" value="edit">
+            <input type="checkbox" id="nukLang" name="ukLang" value="1">
+            <label for="nukLang"> eie uk lang</label><br>
+            <input type="checkbox" id="nmath" name="math" value="1">
+            <label for="nmath"> eie math</label><br>
+            <input type="checkbox" id="nphysics" name="physics" value="1">
+            <label for="nphysics"> eie physics</label><br><br>
         <input type="submit" value="Submit">
     </form>
 
@@ -50,6 +56,12 @@
         <input type="hidden" id="lang" name="lang" value="${sessionScope.lang}">
         <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
         <input type="hidden" id="command" name="command" value="add">
+            <input type="checkbox" id="ukLang" name="ukLang" value="1">
+            <label for="ukLang"> eie uk lang</label><br>
+            <input type="checkbox" id="math" name="math" value="1">
+            <label for="math"> eie math</label><br>
+            <input type="checkbox" id="physics" name="physics" value="1">
+            <label for="physics"> eie physics</label><br><br>
         <input type="submit" value="Submit">
     </form>
 

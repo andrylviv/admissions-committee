@@ -79,9 +79,12 @@
                 <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
                 <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
                 <c:if test="${ not empty user and user eq '0' and block eq '0' }">
-                    <td><a href="<c:url value='/reg_fty' >
+                    <td><a href="<c:url value='/reg_fty.jsp' >
                                 <c:param name="id" value="${faculties.id}"/>
-                                <c:param name="name" value="${faculties.name}"/>
+                                <c:param name="facultyName" value="${faculties.name}"/>
+                                <c:param name="eieUkLang" value="${faculties.isEieUkLang}"/>
+                                <c:param name="eieMath" value="${faculties.isEieMath}"/>
+                                <c:param name="eiePhysics" value="${faculties.isEiePhysics}"/>
                              </c:url>">register</a>
                     </td>
 

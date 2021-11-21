@@ -18,25 +18,48 @@ import static java.util.Objects.nonNull;
         private static final Logger logger = LogManager.getLogger(com.my.servlets.servlet.ListUserServ.class);
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("edit")) {
-                int id = Integer.valueOf(req.getParameter("facultyId"));
-                String nName = req.getParameter("fname");
-                int nStfpl = Integer.valueOf(req.getParameter("stfpl"));
-                int nTotpl = Integer.valueOf(req.getParameter("totpl"));
-                String lang = req.getParameter("lang");
-                FacultyManager.updateFaculty(id, nStfpl, nTotpl, nName, lang);
-                req.getSession().removeAttribute("faculties");
-                req.getRequestDispatcher("/list").forward(req, resp);
-            }
-            if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("add")) {
+            if (nonNull(req.getParameter("command")) && (req.getParameter("command").equals("edit")|| req.getParameter("command").equals("add"))) {
+                int id = 0;
+                if (!(req.getParameter("facultyId")).equals(""))
+                    id = Integer.valueOf(req.getParameter("facultyId"));
+                System.out.println(req.getParameter("facultyId"));
                 String name = req.getParameter("fname");
                 int stfpl = Integer.valueOf(req.getParameter("stfpl"));
                 int totpl = Integer.valueOf(req.getParameter("totpl"));
                 String lang = req.getParameter("lang");
-                FacultyManager.addFaculty(stfpl, totpl, name, lang);
+                int ukLang = 0;
+                if (nonNull(req.getParameter("ukLang")))
+                     ukLang = Integer.valueOf(req.getParameter("ukLang"));
+                int math = 0;
+                if (nonNull(req.getParameter("math")))
+                     math = Integer.valueOf(req.getParameter("math"));
+                int physics = 0;
+                if (nonNull(req.getParameter("physics")))
+                     physics = Integer.valueOf(req.getParameter("physics"));
+                System.out.println(physics);
+                if (req.getParameter("command").equals("edit")) {
+                    FacultyManager.updateFaculty(id, stfpl, totpl, name, lang, ukLang, math, physics);
+                    req.getSession().removeAttribute("faculties");
+                    req.getRequestDispatcher("/list").forward(req, resp);
+                }
+                if (req.getParameter("command").equals("add")) {
+                    FacultyManager.addFaculty(stfpl, totpl, name, lang, ukLang, math, physics);
+                    req.getSession().removeAttribute("faculties");
+                    req.getRequestDispatcher("/list").forward(req, resp);
+                }
+            }
+           /* if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("add")) {
+                String name = req.getParameter("fname");
+                int stfpl = Integer.valueOf(req.getParameter("stfpl"));
+                int totpl = Integer.valueOf(req.getParameter("totpl"));
+                String lang = req.getParameter("lang");
+                int ukLang = Integer.valueOf(req.getParameter("ukLang"));
+                int math = Integer.valueOf(req.getParameter("math"));
+                int physics = Integer.valueOf(req.getParameter("physics"));
+                FacultyManager.addFaculty(stfpl, totpl, name, lang, ukLang, math, physics);
                 req.getSession().removeAttribute("faculties");
                 req.getRequestDispatcher("/list").forward(req, resp);
-            }
+            }*/
             if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("addLocale")) {
                 int id = Integer.valueOf(req.getParameter("facultyId"));
                 String name = req.getParameter("fname");

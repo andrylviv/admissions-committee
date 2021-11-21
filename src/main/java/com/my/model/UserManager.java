@@ -1,8 +1,10 @@
 package com.my.model;
 
 import com.my.db.DBManager;
+import com.my.db.FacultyDAO;
 import com.my.db.UserDAO;
 import com.my.db.UserInfoDAO;
+import com.my.db.entity.Faculty;
 import com.my.db.entity.User;
 import com.my.db.entity.UserInfo;
 
@@ -43,6 +45,7 @@ public class UserManager {
         }
         return u;
     }
+
     public static void stBlockFlag(int id, int blFlag){
         final Connection conn = DBManager.getConnection();
         new UserDAO().setBlockFlag(conn, id, blFlag);
@@ -52,4 +55,21 @@ public class UserManager {
             e.printStackTrace();
         }
     }
+
+    public static boolean regUserOnFaculty(int userId, int facultyId, int eieUkLang,int eieMath, int eiePhysics){
+        final Connection conn = DBManager.getConnection();
+        Faculty faculty = new FacultyDAO().getFacultyById(conn, facultyId);
+        UserInfoDAO infoDAO = new UserInfoDAO();
+        if ((faculty.getIsEieUkLang()>0) && (eieUkLang>0) && (eieUkLang<12))
+            infoDAO.setEieUkLang(conn,userId,eieUkLang);
+        if ((faculty.getIsEieMath()>0) && (eieMath>0) && (eieMath<12))
+            infoDAO.setEieMath(conn,userId,eieMath);
+        if ((faculty.getIsEiePhysics()>0) && (eiePhysics>0) && (eiePhysics<12))
+            infoDAO.setEiePhysics(conn,userId,eiePhysics);
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return true;}
 }

@@ -18,7 +18,7 @@ import static java.util.Objects.nonNull;
  * Acidification filter.
  */
 
-@WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp" })
+@WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp","/edit_faculty.jsp" })
 public class AbFilter implements Filter {
 
     @Override

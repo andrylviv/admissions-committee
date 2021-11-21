@@ -12,8 +12,11 @@ import static com.my.db.DBManager.getConnection;
 public class UserInfoDAO {
     public static final String GET_USER_NAME = "SELECT * FROM user_info WHERE user_id=?";
     public static final String GET_USER_INFO_LIST = "SELECT * FROM user_info";
-    public static final String INSERT_USER_INFO = "INSERT INTO user_info (first_name, last_name, patronymic, city, region, school, uk_lang, uk_liter, eng, algebra, informatics, geometry, uk_history, ph_training, physics, eie_uk_lang, eie_math,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public static final String INSERT_USER_INFO = "INSERT INTO user_info (first_name, last_name, patronymic, city, region, school, uk_lang, uk_liter, eng, algebra, informatics, geometry, uk_history, ph_training, physics,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     public static final String GET_USER_INFO = "SELECT * FROM user_info WHERE user_id=?";
+    public static final String INSERT_EIE_UK_LANG = "UPDATE user_info SET eie_uk_lang = ? WHERE user_id = ?";
+    public static final String INSERT_EIE_MATH = "UPDATE user_info SET eie_math = ? WHERE user_id = ?";
+    public static final String INSERT_EIE_PHYSICS = "UPDATE user_info SET eie_physics = ? WHERE user_id = ?";
 
     public void  insertUserInf(Connection conn,User user, UserInfo userInfo){
         try(//Connection conn = getConnection();
@@ -34,8 +37,8 @@ public class UserInfoDAO {
             stat.setInt(13,userInfo.getUkHistory());
             stat.setInt(14,userInfo.getPhTraining());
             stat.setInt(15,userInfo.getPhysics());
-            stat.setInt(16,userInfo.getEieUkLang());
-            stat.setInt(17,userInfo.getEieMath());
+           /* stat.setInt(16,userInfo.getEieUkLang());
+            stat.setInt(17,userInfo.getEieMath());*/
             stat.setInt(18,user.getId());
 
             stat.executeUpdate();
@@ -78,7 +81,8 @@ public class UserInfoDAO {
                 userInfo.setPhysics(resultSet.getInt(16));
                 userInfo.setEieUkLang(resultSet.getInt(17));
                 userInfo.setEieMath(resultSet.getInt(18));
-                userInfo.setUserId(resultSet.getInt(19));
+                userInfo.setEiePhysics(resultSet.getInt(19));
+                userInfo.setUserId(resultSet.getInt(20));
                 userList.add(userInfo);
             }
 
@@ -92,7 +96,7 @@ public class UserInfoDAO {
         UserInfo userInfo = new UserInfo();
 
         try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_USER_INFO);) {
+            PreparedStatement stat = conn.prepareStatement(GET_USER_INFO)) {
 
 
             stat.setInt(1,id);
@@ -118,7 +122,8 @@ public class UserInfoDAO {
                     userInfo.setPhysics(resultSet.getInt(16));
                     userInfo.setEieUkLang(resultSet.getInt(17));
                     userInfo.setEieMath(resultSet.getInt(18));
-                    userInfo.setUserId(resultSet.getInt(19));
+                    userInfo.setEiePhysics(resultSet.getInt(19));
+                    userInfo.setUserId(resultSet.getInt(20));
 
                 }
             }
@@ -145,5 +150,36 @@ public class UserInfoDAO {
             //add logger
         }
         return name;
+    }
+
+    public void  setEieUkLang(Connection conn,int id, int eieUkLang) {
+        try {
+            PreparedStatement prSt = conn.prepareStatement(INSERT_EIE_UK_LANG);
+            prSt.setInt(1, eieUkLang);
+            prSt.setInt(2, id);
+            prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void  setEieMath(Connection conn,int id, int eieMath) {
+        try {
+            PreparedStatement prSt = conn.prepareStatement(INSERT_EIE_MATH);
+            prSt.setInt(1, eieMath);
+            prSt.setInt(2, id);
+            prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void  setEiePhysics(Connection conn,int id, int eiePhysics) {
+        try {
+            PreparedStatement prSt = conn.prepareStatement(INSERT_EIE_PHYSICS);
+            prSt.setInt(1, eiePhysics);
+            prSt.setInt(2, id);
+            prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

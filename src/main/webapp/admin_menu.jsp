@@ -5,8 +5,9 @@
   Time: 2:07
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html>
 <head>
@@ -19,12 +20,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "pagecontent" var = "lang"/>
 
 <h2>Hello ADMIN!</h2>
 <a href="<c:url value='/list_user'>
              <c:param name="command" value="lou"/>
          </c:url>">List of applicants</a>
 <a href="<c:url value="/list"/>">Faculty List</a>
-<a href="<c:url value='/logout' />">Logout</a>
+<a href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </body>
 </html>

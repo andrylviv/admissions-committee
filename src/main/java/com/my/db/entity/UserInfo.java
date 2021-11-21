@@ -19,6 +19,7 @@ public class UserInfo {
     private int physics;
     private int eieUkLang;
     private int eieMath;
+    private int eiePhysics;
     private int userId;
 
     public UserInfo() {
@@ -166,6 +167,14 @@ public class UserInfo {
 
     public void setEieMath(int eieMath) {
         this.eieMath = eieMath;
+    }
+
+    public int getEiePhysics() {
+        return eiePhysics;
+    }
+
+    public void setEiePhysics(int eiePhysics) {
+        this.eiePhysics = eiePhysics;
     }
 
     public int getUserId() {

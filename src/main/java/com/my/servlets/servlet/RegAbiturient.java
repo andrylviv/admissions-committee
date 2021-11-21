@@ -14,18 +14,6 @@ import java.io.IOException;
 public class RegAbiturient extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in_reg_doGet");
-       /* request.setAttribute("message","request");
-        request.getSession().setAttribute("message","session");
-        getServletContext().setAttribute("message","servlet context");*/
-        //session.getAttribute("email")
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().println(request.getSession().getAttribute("abitName")+" registred");
-        //request.getRequestDispatcher("testprg.jsp").forward(request,response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
@@ -60,5 +48,17 @@ public class RegAbiturient extends HttpServlet {
         session.removeAttribute("isAdmin");
         session.setAttribute("abitName", firstName);
         response.sendRedirect("reg_abiturient");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("in_reg_doGet");
+       /* request.setAttribute("message","request");
+        request.getSession().setAttribute("message","session");
+        getServletContext().setAttribute("message","servlet context");*/
+        //session.getAttribute("email")
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().println(request.getSession().getAttribute("abitName")+" registred");
+        //request.getRequestDispatcher("testprg.jsp").forward(request,response);
     }
 }

@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class FacultyManager {
-    public static void updateFaculty(int id, int stFunPlaces, int totPlaces, String name, String languageId){
+    public static void updateFaculty(int id, int stFunPlaces, int totPlaces, String name, String languageId, int ukLang, int math, int physics){
         Connection conn  = DBManager.getConnection();
         Faculty faculty = new Faculty();
         faculty.setId(id);
@@ -16,6 +16,9 @@ public class FacultyManager {
         faculty.setTotPlaces(totPlaces);
         faculty.setName(name);
         faculty.setLangName(languageId);
+        faculty.setIsEieUkLang(ukLang);
+        faculty.setIsEieMath(math);
+        faculty.setIsEiePhysics(physics);
         new FacultyDAO().updateFaculty(conn,faculty);
         try {
             conn.close();
@@ -24,13 +27,16 @@ public class FacultyManager {
         }
     }
 
-    public static void addFaculty(int stFunPlaces, int totPlaces, String name, String languageId){
+    public static void addFaculty(int stFunPlaces, int totPlaces, String name, String languageId, int ukLang, int math, int physics){
         Connection conn  = DBManager.getConnection();
         Faculty faculty = new Faculty();
         faculty.setStFundedPlaces(stFunPlaces);
         faculty.setTotPlaces(totPlaces);
         faculty.setName(name);
         faculty.setLangName(languageId);
+        faculty.setIsEieUkLang(ukLang);
+        faculty.setIsEieMath(math);
+        faculty.setIsEiePhysics(physics);
         new FacultyDAO().addFaculty(conn,faculty);
         new FacultyDAO().addFacultyLocal(conn,faculty);
         try {

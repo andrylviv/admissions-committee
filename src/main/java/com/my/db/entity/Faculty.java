@@ -6,6 +6,9 @@ public class Faculty {
     int stFundedPlaces;
     int totPlaces;
     String langName;
+    int isEieMath;
+    int isEieUkLang;
+    int isEiePhysics;
 
     public Faculty() {
     }
@@ -57,5 +60,29 @@ public class Faculty {
 
     public void setLangName(String langName) {
         this.langName = langName;
+    }
+
+    public int getIsEieMath() {
+        return isEieMath;
+    }
+
+    public void setIsEieMath(int isEieMath) {
+        this.isEieMath = isEieMath;
+    }
+
+    public int getIsEieUkLang() {
+        return isEieUkLang;
+    }
+
+    public void setIsEieUkLang(int isEieUkLang) {
+        this.isEieUkLang = isEieUkLang;
+    }
+
+    public int getIsEiePhysics() {
+        return isEiePhysics;
+    }
+
+    public void setIsEiePhysics(int isEiePhysics) {
+        this.isEiePhysics = isEiePhysics;
     }
 }

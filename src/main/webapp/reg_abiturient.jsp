@@ -88,18 +88,18 @@
             <td>physics:</td>
             <td><input type="number" max="12" min="1" required name="physics"/></td>
         </tr>
-        <tr>
-            <td>eie uk lang:</td>
-            <td><input type="number" max="12" min="1" required name="eie uk lang"/></td>
-        </tr>
-        <tr>
-            <td>eie math:</td>
-            <td><input type="number" max="12" min="1" required name="eie math"/></td>
-        </tr>
-        <tr>
-            <td><input class="button" type="submit" value="Реєстрація"></td>
-        </tr>
-    </table>
+<%--  <tr>
+          <td>eie uk lang:</td>
+          <td><input type="number" max="12" min="1" required name="eie uk lang"/></td>
+      </tr>
+      <tr>
+          <td>eie math:</td>
+          <td><input type="number" max="12" min="1" required name="eie math"/></td>
+      </tr>  --%>
+      <tr>
+          <td><input class="button" type="submit" value="Реєстрація"></td>
+      </tr>
+  </table>
 </form>
 </body>
 </html>

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>User Information</title>
@@ -21,6 +22,8 @@
     </style>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "pagecontent" var = "lang"/>
 <div align="right">
 <c:set var="block" value="${user.isBlocked}" scope="page"/>
 <c:if test="${ block eq '1' }">
@@ -46,7 +49,8 @@
                                  </c:url>">unblock</a>
         </td>
     </c:if>
-
+    <br>
+    <a href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </div>
 <hr>
 <table>
@@ -59,10 +63,41 @@
     <tr>
         <td><c:out value="${ uInfo.firstName }" /></td>
     </tr>
+    <tr>
         <td><c:out value="${ uInfo.partonymic }" /></td>
     </tr>
+    <tr>
+    <td><c:out value="${ uInfo.city }" /></td>
     </tr>
-    <td><c:out value="${ uInfo.partonymic }" /></td>
+    <tr>
+        <td><c:out value="${ uInfo.region }" /></td>
+    </tr>
+    <tr>
+        <td><c:out value="${ uInfo.school }" /></td>
+    </tr>
+    <tr>
+        <td><c:out value="${ uInfo.ukLang }" /></td>
+    </tr>
+    <tr>
+        <td>ukLiter:<c:out value="${ uInfo.ukLiter }" /></td>
+    </tr>
+    <tr>
+        <td>eng:<c:out value="${ uInfo.eng }" /></td>
+    </tr>
+    <tr>
+        <td>algebra:<c:out value="${ uInfo.algebra }" /></td>
+    </tr>
+    <tr>
+        <td>informatics:<c:out value="${ uInfo.informatics }" /></td>
+    </tr>
+    <tr>
+        <td>geometry:<c:out value="${ uInfo.geometry }" /></td>
+    </tr>
+    <tr>
+        <td>ukHistory:<c:out value="${ uInfo.ukHistory }" /></td>
+    </tr>
+    <tr>
+        <td>phTraining:<c:out value="${ uInfo.phTraining }" /></td>
     </tr>
 </table>
 </body>
