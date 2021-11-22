@@ -54,51 +54,84 @@
 </div>
 <hr>
 <table>
+
     <tr>
-        <td>id:<c:out value="${ user.id }" /></td>
+        <td>id:</td>
+        <td><c:out value="${ user.id }" /></td>
     </tr>
     <tr>
-        <td>email:<c:out value="${ user.email }" /></td>
+        <td>email:</td>
+        <td><c:out value="${ user.email }" /></td>
     </tr>
     <tr>
+        <td>firstName:</td>
         <td><c:out value="${ uInfo.firstName }" /></td>
     </tr>
     <tr>
+        <td>partonymic:</td>
         <td><c:out value="${ uInfo.partonymic }" /></td>
     </tr>
     <tr>
-    <td><c:out value="${ uInfo.city }" /></td>
+        <td>city:</td>
+        <td><c:out value="${ uInfo.city }" /></td>
     </tr>
     <tr>
+        <td>region:</td>
         <td><c:out value="${ uInfo.region }" /></td>
     </tr>
     <tr>
+        <td>school:</td>
         <td><c:out value="${ uInfo.school }" /></td>
     </tr>
     <tr>
+        <td>ukLang:</td>
         <td><c:out value="${ uInfo.ukLang }" /></td>
     </tr>
     <tr>
-        <td>ukLiter:<c:out value="${ uInfo.ukLiter }" /></td>
+        <td>ukLiter:</td>
+        <td><c:out value="${ uInfo.ukLiter }" /></td>
     </tr>
     <tr>
-        <td>eng:<c:out value="${ uInfo.eng }" /></td>
+        <td>eng:</td>
+        <td><c:out value="${ uInfo.eng }" /></td>
     </tr>
     <tr>
-        <td>algebra:<c:out value="${ uInfo.algebra }" /></td>
+        <td>algebra:</td>
+        <td><c:out value="${ uInfo.algebra }" /></td>
     </tr>
     <tr>
-        <td>informatics:<c:out value="${ uInfo.informatics }" /></td>
+        <td>informatics:</td>
+        <td><c:out value="${ uInfo.informatics }" /></td>
     </tr>
     <tr>
-        <td>geometry:<c:out value="${ uInfo.geometry }" /></td>
+        <td>geometry:</td>
+        <td><c:out value="${ uInfo.geometry }" /></td>
     </tr>
     <tr>
-        <td>ukHistory:<c:out value="${ uInfo.ukHistory }" /></td>
+        <td>ukHistory:</td>
+        <td><c:out value="${ uInfo.ukHistory }" /></td>
     </tr>
     <tr>
-        <td>phTraining:<c:out value="${ uInfo.phTraining }" /></td>
+        <td>phTraining:</td>
+        <td><c:out value="${ uInfo.phTraining }" /></td>
     </tr>
+    <tr>
+        <td>physics:</td>
+        <td><c:out value="${ uInfo.physics }" /></td>
+    </tr>
+    <tr>
+        <td>eieUkLang:</td>
+        <td><c:out value="${ uInfo.eieUkLang }" /></td>
+    </tr>
+    <tr>
+        <td>eieMath:</td>
+        <td><c:out value="${ uInfo.eieMath }" /></td>
+    </tr>
+    <tr>
+        <td>eiePhysics:</td>
+        <td><c:out value="${ uInfo.eiePhysics }" /></td>
+    </tr>
+
 </table>
 </body>
 </html>

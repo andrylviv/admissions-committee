@@ -20,25 +20,24 @@
 <body>
 <table>
     <tr>
-        <th>Id</th>
+<%--    <th>Id</th>  --%>
         <th>Name</th>
         <th>Last name</th>
         <th>Partonymic</th>
     </tr>
     <c:forEach var="usersInfo" items="${usersInfo}" varStatus="status">
         <tr>
-
-            <td><c:out value="${ usersInfo.id }" /></td>
-            <td><c:out value="${ usersInfo.firstName }" /></td>
-            <td><c:out value="${ usersInfo.lastName }" /></td>
-            <td><c:out value="${ usersInfo.partonymic }" /></td>
-            <td><a href="<c:url value='list_user' >
-                            <c:param name="userId" value="${usersInfo.userId}"/>
-                            <c:param name="command" value="userInfo"/>
-                         </c:url>
-            ">applicant information</a>
-            </td>
-        </tr>
-    </c:forEach>
-</table>
-</body></html>
+        <%--   <td><c:out value="${ usersInfo.id }" /></td>  --%>
+               <td><c:out value="${ usersInfo.firstName }" /></td>
+               <td><c:out value="${ usersInfo.lastName }" /></td>
+               <td><c:out value="${ usersInfo.partonymic }" /></td>
+               <td><a href="<c:url value='list_user' >
+                               <c:param name="userId" value="${usersInfo.userId}"/>
+                               <c:param name="command" value="userInfo"/>
+                            </c:url>
+               ">applicant information</a>
+               </td>
+           </tr>
+       </c:forEach>
+   </table>
+   </body></html>

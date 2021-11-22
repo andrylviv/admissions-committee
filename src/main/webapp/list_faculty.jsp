@@ -19,6 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         h5 {color:red;}
+        form {margin: 1px;}
     </style>
 </head>
 <body>
@@ -97,7 +98,19 @@
                                     <c:param name="command" value="edit"/>
                                  </c:url>">edit faculty</a>
                     </td>
-
+                    <td>
+                        <form action="statement" method="POST">
+                            <input type="hidden" name="id" value="${faculties.id}" />
+                            <input type="hidden" name="name" value="${faculties.name}" />
+                            <a href="#" onclick="this.parentNode.submit()">add to statement</a>
+                        </form>
+                    </td>
+               <%--  <td><a href="<c:url value='/statement' >
+                                 <c:param name="id" value="${faculties.id}"/>
+                                 <c:param name="name" value="${faculties.name}"/>
+                                 <c:param name="command" value="edit"/>
+                              </c:url>">add to statement</a>
+                     </td>--%>
                 </c:if>
                 <c:set var="name" value="${faculties.name}" scope="page"/>
                 <c:if test="${ not empty name and name eq 'add locale name' }">

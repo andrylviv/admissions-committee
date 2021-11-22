@@ -27,7 +27,7 @@
         <input type="text" id="nfname" name="fname" required><br><br>
         <label for="stfpl">new st. fon places:</label>
         <input type="number" id="nstfpl" name="stfpl" min="0" required><br><br>
-        <label for="totpl">total places:</label>
+        <label for="totpl">new total places:</label>
         <input type="number" id="ntotpl" name="totpl" min="0" required><br><br>
         <input type="hidden" id="nlang" name="lang" value="${sessionScope.lang}">
         <input type="hidden" id="nfacultyId" name="facultyId" value="${param.id}">

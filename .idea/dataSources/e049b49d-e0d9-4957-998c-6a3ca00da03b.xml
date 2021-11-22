@@ -1307,6 +1307,7 @@ faculty_id</ColNames>
     <column id="322" parent="288" name="is_blocked">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="323" parent="288" name="email">
