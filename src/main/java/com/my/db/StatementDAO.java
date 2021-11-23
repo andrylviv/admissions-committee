@@ -1,27 +1,29 @@
 package com.my.db;
 
+import com.my.db.entity.Statement;
 import com.my.db.entity.UserFaculty;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatementDAO {
     public static final String USER_ON_FACULTY_EXIST = "SELECT * FROM statement WHERE user_id=?";
     public static final String INSERT_USER_FACULTY_STATEMENT = "INSERT INTO statement(user_id,faculty_id) VALUES (?,?)";
-    public static final String INSERT_FIN_FLAG = "UPDATE statement SET is_fin = ? WHERE user_id = ?";
+    public static final String INSERT_SFP_FLAG = "UPDATE statement SET st_fon_pl = ? WHERE user_id = ?";
+    public static final String INSERT_NSFP_FLAG = "UPDATE statement SET non_st_fon_pl = ? WHERE user_id = ?";
+    public static final String GET_APPLICANT_FROM_STATEMENT = "SELECT * FROM statement WHERE faculty_id=?";
 
     public boolean  ifUserExist(Connection conn, UserFaculty uf){
         int uId = 0;
-        //Statement statement = new Statement();
         try(PreparedStatement stat = conn.prepareStatement(USER_ON_FACULTY_EXIST)) {
 
             stat.setInt(1,uf.getUserId());
-            //stat.setInt(2,uf.getFacultyId());
             try(ResultSet resultSet = stat.executeQuery()) {
                 while (resultSet.next()) {
                     uId = resultSet.getInt(1);
-                   // statement.setUserId(resultSet.getInt(2));
                 }
             }
         } catch (SQLException e) {
@@ -42,10 +44,41 @@ public class StatementDAO {
         }
     }
 
-    public void  setFinFlag(Connection conn,int id, int finFlag) {
+    public List<Statement> getApplicant(Connection conn, int facultyId){
+
+        List<Statement> applicantList = new ArrayList<>();
+        try(
+                PreparedStatement stat = conn.prepareStatement(GET_APPLICANT_FROM_STATEMENT)) {
+            stat.setInt(1,facultyId);
+            try(ResultSet resultSet = stat.executeQuery()) {
+                while (resultSet.next()) {
+                    Statement statement = new Statement();
+                    statement.setUserId(resultSet.getInt(1));
+                    statement.setFacultyId(resultSet.getInt(2));
+                    applicantList.add(statement);
+                }
+            }
+        } catch (SQLException e) {
+            //add logger
+        }
+        return applicantList;
+    }
+
+    public void  setStFonPl(Connection conn,int id, int flag) {
         try {
-            PreparedStatement prSt = conn.prepareStatement(INSERT_FIN_FLAG);
-            prSt.setInt(1, finFlag);
+            PreparedStatement prSt = conn.prepareStatement(INSERT_SFP_FLAG);
+            prSt.setInt(1, flag);
+            prSt.setInt(2, id);
+            prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void  setNonStFonPl(Connection conn,int id, int flag) {
+        try {
+            PreparedStatement prSt = conn.prepareStatement(INSERT_NSFP_FLAG);
+            prSt.setInt(1, flag);
             prSt.setInt(2, id);
             prSt.executeUpdate();
         } catch (SQLException e) {

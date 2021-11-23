@@ -12,7 +12,7 @@
 </head>
 <body>
 
+     ${sessionScope.abitName= "fff"}
      ${sessionScope.abitName}
-
 </body>
 </html>

@@ -61,7 +61,12 @@
                 <c:if test="${ not empty user and user eq '1' }">
                     <a href="<c:url value='edit_faculty.jsp' >
                                 <c:param name="command" value="add"/>
-                             </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/></a>
+                             </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/>
+                    </a><br>
+                    <form action="statement" method="POST">
+                        <input type="hidden" name="command" value="fin" />
+                        <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.finalise" bundle = "${lang}"/></a>
+                    </form>
                 </c:if>
 </div>
 
@@ -102,6 +107,7 @@
                         <form action="statement" method="POST">
                             <input type="hidden" name="id" value="${faculties.id}" />
                             <input type="hidden" name="name" value="${faculties.name}" />
+                            <input type="hidden" name="command" value="ats" />
                             <a href="#" onclick="this.parentNode.submit()">add to statement</a>
                         </form>
                     </td>

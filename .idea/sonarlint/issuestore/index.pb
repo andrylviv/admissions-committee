@@ -22,8 +22,6 @@ W
 'src/main/java/com/my/model/RegAbit.java,3\b\3b6f5a12f7662fb6abb79bed8242d5b6cdb79f3a
 [
 +src/main/java/com/my/db/entity/Faculty.java,b\7\b7326c519e0c84bbb232b4739ee4a2a55a9e536f
-H
-src/main/webapp/test.jsp,2\7\2794cd4f47feb7b38b89b4a34cc3a594b17aac16
 S
 #src/main/webapp/abiturient_menu.jsp,0\c\0c4460ba6a61ad5323900c0443295743edd87487
 M
@@ -38,8 +36,6 @@ c
 3src/main/java/com/my/servlets/filter/AdmFilter.java,6\b\6b80830cfd2291d9dc56a687b312cf9a62c6dd88
 d
 4src/main/java/com/my/servlets/filter/AuOuFilter.java,b\4\b4998227e0edd40843da22d70388ea567e3b390c
-a
-1src/main/java/com/my/servlets/servlet/LangCh.java,4\e\4e307d997ec8ac2851c05bf57584e8d47e8b9cfb
 N
 src/main/webapp/admin_menu.jsp,1\4\14299fb2e746d6f352b44c4b7e30d34080a8ce45
 [
@@ -52,8 +48,6 @@ P
  src/main/webapp/list_faculty.jsp,1\a\1a1c9c8ff019eb9e3c0716ea9c304a9232c1c463
 a
 1src/main/java/com/my/servlets/servlet/Logout.java,c\6\c60160335ad57931bdcacd6e26b40edcb8e9a72a
-G
-src/main/webapp/loc.jsp,b\d\bd95091b09ed8e2d39f929c277ae0e8d81a54bf4
 T
 $src/main/java/pagecontent.properties,e\2\e2492623eb4449c32cc19095e95da309af689eb0
 I
