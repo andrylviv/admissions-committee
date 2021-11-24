@@ -17,29 +17,36 @@ public class RegFtyServ extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int facultyId = 0;
-        if (nonNull(req.getParameter("facultyId")))
-            facultyId = Integer.valueOf(req.getParameter("facultyId"));
-        int eieUkLang = 0;
-        if (nonNull(req.getParameter("eieUkLang")))
-            eieUkLang = Integer.valueOf(req.getParameter("eieUkLang"));
-        int eiePhysics = 0;
-        if (nonNull(req.getParameter("eiePhysics")))
-            eiePhysics = Integer.valueOf(req.getParameter("eiePhysics"));
-        int eieMath = 0;
-        if (nonNull(req.getParameter("eieMath")))
-            eieMath = Integer.valueOf(req.getParameter("eieMath"));
-        int userId = (int)req.getSession().getAttribute("id");
-        boolean isValid = UserManager.regUserOnFaculty(userId, facultyId, eieUkLang,eieMath, eiePhysics);
-        if (!isValid)
-            resp.getWriter().println("invalid credentials");
+        if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("register")) {
+            int facultyId = 0;
+            if (nonNull(req.getParameter("facultyId")))
+                facultyId = Integer.valueOf(req.getParameter("facultyId"));
+            int eieUkLang = 0;
+            if (nonNull(req.getParameter("eieUkLang")))
+                eieUkLang = Integer.valueOf(req.getParameter("eieUkLang"));
+            int eiePhysics = 0;
+            if (nonNull(req.getParameter("eiePhysics")))
+                eiePhysics = Integer.valueOf(req.getParameter("eiePhysics"));
+            int eieMath = 0;
+            if (nonNull(req.getParameter("eieMath")))
+                eieMath = Integer.valueOf(req.getParameter("eieMath"));
+            int userId = (int) req.getSession().getAttribute("id");
+            boolean isValid = UserManager.regUserOnFaculty(userId, facultyId, eieUkLang, eieMath, eiePhysics);
+            if (!isValid)
+                resp.getWriter().println("invalid credentials");
 
-        //int userId = (int)req.getSession().getAttribute("id");
-        //String idJsp = req.getParameter("id");
-
-        RegAbitFlty.regUserFlty(userId,facultyId);
-        req.getSession().setAttribute("facultyName", req.getParameter("facultyName"));
-        resp.sendRedirect("reg_fty");
+            RegAbitFlty.regUserFlty(userId, facultyId);
+            //req.getSession().setAttribute("facultyName", req.getParameter("facultyName"));
+            resp.sendRedirect("list");
+        }
+        if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("unregister")) {
+            int facultyId = 0;
+            if (nonNull(req.getParameter("id")))
+                facultyId = Integer.valueOf(req.getParameter("id"));
+            int userId = (int) req.getSession().getAttribute("id");
+            RegAbitFlty.unRegUserFlty(userId, facultyId);
+            resp.sendRedirect("list");
+        }
     }
 
     @Override

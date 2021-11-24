@@ -15,6 +15,7 @@ public class StatementDAO {
     public static final String INSERT_SFP_FLAG = "UPDATE statement SET st_fon_pl = ? WHERE user_id = ?";
     public static final String INSERT_NSFP_FLAG = "UPDATE statement SET non_st_fon_pl = ? WHERE user_id = ?";
     public static final String GET_APPLICANT_FROM_STATEMENT = "SELECT * FROM statement WHERE faculty_id=?";
+    public static final String REMOVE_APPLICANT= "DELETE FROM statement WHERE user_id =?";
 
     public boolean  ifUserExist(Connection conn, UserFaculty uf){
         int uId = 0;
@@ -62,6 +63,17 @@ public class StatementDAO {
             //add logger
         }
         return applicantList;
+    }
+
+    public void  removeApplicant(Connection conn,int id){
+        try{
+            PreparedStatement stat = conn.prepareStatement(REMOVE_APPLICANT);
+            stat.setInt(1,id);
+
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            //add logger
+        }
     }
 
     public void  setStFonPl(Connection conn,int id, int flag) {

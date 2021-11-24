@@ -120,4 +120,30 @@ public class StatementManager {
             statementDAO.setNonStFonPl(connection, applicant.getApplicantId(), 1);
         }
     }
+
+    public static List<UserInfo> getFacultyApplicantList(int facultyId){
+        final Connection conn = DBManager.getConnection();
+        List<Statement> applicantList = new StatementDAO().getApplicant(conn, facultyId);
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        List<UserInfo> userInfoList = new ArrayList<>();
+        for (Statement st:applicantList) {
+            userInfoList.add(userInfoDAO.getUserInfo(conn,st.getUserId()));
+        }
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userInfoList;
+    }
+
+    public static void removeFromStatement(int id){
+        final Connection conn = DBManager.getConnection();
+        new StatementDAO().removeApplicant(conn, id);
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

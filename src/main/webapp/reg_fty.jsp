@@ -47,6 +47,7 @@
         <td>
             <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
             <input type="hidden" id="facultyName" name="facultyName" value="${param.facultyName}">
+            <input type="hidden" id="command" name="command" value="${param.command}">
             <input class="button" type="submit" value="Реєстрація"></td>
     </tr>
 </form>

@@ -84,39 +84,65 @@
             <td><c:out value="${ faculties.totPlaces }" /></td>
                 <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
                 <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
-                <c:if test="${ not empty user and user eq '0' and block eq '0' }">
-                    <td><a href="<c:url value='/reg_fty.jsp' >
-                                <c:param name="id" value="${faculties.id}"/>
-                                <c:param name="facultyName" value="${faculties.name}"/>
-                                <c:param name="eieUkLang" value="${faculties.isEieUkLang}"/>
-                                <c:param name="eieMath" value="${faculties.isEieMath}"/>
-                                <c:param name="eiePhysics" value="${faculties.isEiePhysics}"/>
-                             </c:url>">register</a>
-                    </td>
+                <c:if test="${ not empty user and user eq '0' and block eq '0' }">           <%--if user abiturient--%>
+                    <c:set var="fl" value="0" scope="page"/>
+                    <c:forEach var="usfaculty" items="${sessionScope.usfaculty}" varStatus="status">
+                        <c:set var="fidList" value="${faculties.id}" scope="page"/>
+                        <c:set var="fidFI" value="${usfaculty.facultyId}" scope="page"/>
+                        <c:set var="usId" value="${usfaculty.userId}" scope="page"/>
+                        <c:set var="abId" value="${sessionScope.id}" scope="page"/>
+                        <c:if test="${ not empty fidList and fidList eq fidFI and usId eq abId}">
+                            <c:set var="fl" value="1" scope="page"/>
+
+                                 <td>
+                                     <form action="reg_fty" method="POST">
+                                         <input type="hidden" name="id" value="${faculties.id}" />
+                                         <input type="hidden" name="facultyName" value="${faculties.name}" />
+                                         <input type="hidden" name="command" value="unregister" />
+                                         <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.unregister" bundle = "${lang}"/></a>
+                                     </form>
+                                 </td>
+                        </c:if>
+                    </c:forEach>
+
+                             <c:if test="${ fl != 1}">
+                                 <td><a href="<c:url value='/reg_fty.jsp' >
+                                                 <c:param name="id" value="${faculties.id}"/>
+                                                 <c:param name="facultyName" value="${faculties.name}"/>
+                                                 <c:param name="eieUkLang" value="${faculties.isEieUkLang}"/>
+                                                 <c:param name="eieMath" value="${faculties.isEieMath}"/>
+                                                 <c:param name="eiePhysics" value="${faculties.isEiePhysics}"/>
+                                                 <c:param name="command" value="register"/>
+                                              </c:url>">register</a>
+                                 </td>
+                                 <c:set var="fl" value="0" scope="page"/>
+                             </c:if>
 
                 </c:if>
-                <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-                <c:if test="${ not empty user and user eq '1' }">
-                    <td><a href="<c:url value='edit_faculty.jsp' >
-                                    <c:param name="id" value="${faculties.id}"/>
-                                    <c:param name="name" value="${faculties.name}"/>
-                                    <c:param name="command" value="edit"/>
-                                 </c:url>">edit faculty</a>
-                    </td>
-                    <td>
-                        <form action="statement" method="POST">
-                            <input type="hidden" name="id" value="${faculties.id}" />
-                            <input type="hidden" name="name" value="${faculties.name}" />
-                            <input type="hidden" name="command" value="ats" />
-                            <a href="#" onclick="this.parentNode.submit()">add to statement</a>
-                        </form>
-                    </td>
-               <%--  <td><a href="<c:url value='/statement' >
-                                 <c:param name="id" value="${faculties.id}"/>
-                                 <c:param name="name" value="${faculties.name}"/>
-                                 <c:param name="command" value="edit"/>
-                              </c:url>">add to statement</a>
-                     </td>--%>
+
+
+                 <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                 <c:if test="${ not empty user and user eq '1' }">                        <%--if user administrator--%>
+                     <td><a href="<c:url value='edit_faculty.jsp' >
+                                     <c:param name="id" value="${faculties.id}"/>
+                                     <c:param name="name" value="${faculties.name}"/>
+                                     <c:param name="command" value="edit"/>
+                                  </c:url>">edit faculty</a>
+                     </td>
+                     <td>
+                         <form action="statement" method="POST">
+                             <input type="hidden" name="id" value="${faculties.id}" />
+                             <input type="hidden" name="name" value="${faculties.name}" />
+                             <input type="hidden" name="command" value="ats" />
+                             <a href="#" onclick="this.parentNode.submit()">add to statement</a>
+                         </form>
+                     </td>
+                     <td><a href="<c:url value='/statement' >
+                                  <c:param name="id" value="${faculties.id}"/>
+                                  <c:param name="name" value="${faculties.name}"/>
+                                  <c:param name="com" value="getList"/>
+                               </c:url>">statement list</a>
+                     </td>
                 </c:if>
                 <c:set var="name" value="${faculties.name}" scope="page"/>
                 <c:if test="${ not empty name and name eq 'add locale name' }">

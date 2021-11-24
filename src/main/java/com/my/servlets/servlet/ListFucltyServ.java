@@ -1,5 +1,6 @@
 package com.my.servlets.servlet;
 
+import com.my.db.UserFacultyDAO;
 import com.my.db.entity.Faculty;
 import com.my.model.FacultyList;
 import org.apache.logging.log4j.LogManager;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 import static java.util.Objects.nonNull;
@@ -57,6 +59,9 @@ public class ListFucltyServ extends HttpServlet {
             faculties = FacultyList.getFacultyList(language);
             req.getSession().setAttribute("faculties", faculties);
         }
+
+        req.getSession().setAttribute("usfaculty",new UserFacultyDAO().getAppFaculty((Connection)req.getServletContext().getAttribute("conn")));
+
         req.getRequestDispatcher("list_faculty.jsp").forward(req,resp);
     }
 }
