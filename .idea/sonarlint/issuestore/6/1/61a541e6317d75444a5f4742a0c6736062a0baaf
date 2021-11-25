@@ -1,17 +1,21 @@
 
-i
-java:S2441#"MMake "List" and its parameters serializable or don't store it in the session.(¯¼ş8ÁÁÏ€Ó/
+u
+java:S1989*"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8¸¸ÿÒ/
+k
+java:S1192"IDefine a constant instead of duplicating this literal "sortType" 3 times.(ºùü•şÿÿÿÿ8«µ šÕ/
 g
-java:S1192"JDefine a constant instead of duplicating this literal "faculties" 5 times.(ºğÔ‡8ÁÁÏ€Ó/
+java:S1192""JDefine a constant instead of duplicating this literal "faculties" 5 times.(ºğÔ‡8ÁÁÏ€Ó/
 j
-java:S2441"MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8•ˆÓ/
-u
-java:S1989"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8âœ÷Ò/
+java:S1192"HDefine a constant instead of duplicating this literal "command" 4 times.(ş“ı¥şÿÿÿÿ8¸¾£şÒ/
 j
-java:S24414"MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8´¢Ü€Ó/
+java:S2441""MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8•ˆÓ/
+o
+java:S2441?"MMake "List" and its parameters serializable or don't store it in the session.(‚Óşÿøÿÿÿÿ8«µ šÕ/
 ƒ
-java:S19896"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(å²“òÿÿÿÿÿ8ËÊşöÒ/
+java:S1989A"aHandle the following exceptions that could be thrown by "forward": ServletException, IOException.(å²“òÿÿÿÿÿ8ËÊşöÒ/
+i
+java:S2441)"MMake "List" and its parameters serializable or don't store it in the session.(¯¼ş8ÁÁÏ€Ó/
 j
-java:S1192"HDefine a constant instead of duplicating this literal "command" 4 times.(ş“ı¥şÿÿÿÿ8¸¾£şÒ/
+java:S2441<"MMake "List" and its parameters serializable or don't store it in the session.(ºğÔ‡8´¢Ü€Ó/
 u
-java:S1989$"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8¸¸ÿÒ/
+java:S1989#"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÇÎ®Áıÿÿÿÿ8âœ÷Ò/

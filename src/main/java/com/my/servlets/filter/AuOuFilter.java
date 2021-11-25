@@ -66,6 +66,13 @@ public class AuOuFilter implements Filter {
             req.getRequestDispatcher("reg_abiturient").forward(request, response);
         }
 
+        if (req.getServletPath().equals("/lang_ch")){
+
+           /* session.removeAttribute("email");
+            session.removeAttribute("isAdmin");*/
+            req.getRequestDispatcher("lang_ch").forward(request, response);
+        }
+
         //Logged user.
         if (nonNull(session) &&
             nonNull(session.getAttribute("email"))
@@ -102,7 +109,9 @@ public class AuOuFilter implements Filter {
             }
 
 
-        } else if (!req.getServletPath().equals("/reg_abiturient")&&!req.getServletPath().equals("/reg_abiturient.jsp")){
+        } else if (!req.getServletPath().equals("/reg_abiturient")
+                 &&!req.getServletPath().equals("/reg_abiturient.jsp")
+                 &&!req.getServletPath().equals("/lang_ch")){
             System.out.println(-1+"aouf");
             moveTo(req, res, -1);
         }
@@ -111,7 +120,7 @@ public class AuOuFilter implements Filter {
     /**
      * Move user to menu.
      * If access 'admin' move to admin menu.
-     * If access 'abiturient' move to user menu.
+     * If access 'applicant' move to user menu.
      */
     private void moveTo(final HttpServletRequest req,
                         final HttpServletResponse res,
@@ -122,7 +131,7 @@ public class AuOuFilter implements Filter {
         if (isAdmin==1) {
 
             req.getRequestDispatcher("admin_menu.jsp").forward(req, res);
-
+            //res.sendRedirect("admin_menu.jsp");
         } else if (isAdmin==0) {
 
             req.getRequestDispatcher("abiturient_menu.jsp").forward(req, res);
