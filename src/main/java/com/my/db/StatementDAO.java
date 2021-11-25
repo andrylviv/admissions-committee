@@ -16,6 +16,7 @@ public class StatementDAO {
     public static final String INSERT_NSFP_FLAG = "UPDATE statement SET non_st_fon_pl = ? WHERE user_id = ?";
     public static final String GET_APPLICANT_FROM_STATEMENT = "SELECT * FROM statement WHERE faculty_id=?";
     public static final String REMOVE_APPLICANT= "DELETE FROM statement WHERE user_id =?";
+    public static final String RESET_FLAG = "UPDATE statement SET non_st_fon_pl = 0, st_fon_pl = 0";
 
     public boolean  ifUserExist(Connection conn, UserFaculty uf){
         int uId = 0;
@@ -56,6 +57,8 @@ public class StatementDAO {
                     Statement statement = new Statement();
                     statement.setUserId(resultSet.getInt(1));
                     statement.setFacultyId(resultSet.getInt(2));
+                    statement.setStFonPl(resultSet.getInt(3));
+                    statement.setNonStFonPl(resultSet.getInt(4));
                     applicantList.add(statement);
                 }
             }
@@ -93,6 +96,15 @@ public class StatementDAO {
             prSt.setInt(1, flag);
             prSt.setInt(2, id);
             prSt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void  resetFlag(Connection conn) {
+        try {
+            java.sql.Statement stat=conn.createStatement();
+            stat.executeUpdate(RESET_FLAG);
         } catch (SQLException e) {
             e.printStackTrace();
         }

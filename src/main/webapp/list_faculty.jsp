@@ -129,6 +129,17 @@
                                      <c:param name="command" value="edit"/>
                                   </c:url>">edit faculty</a>
                      </td>
+
+                     <c:set var="name" value="${faculties.name}" scope="page"/>
+                     <c:if test="${ not empty name and name eq 'add locale name' }">
+                         <td><a href="<c:url value='edit_faculty.jsp' >
+                                        <c:param name="id" value="${faculties.id}"/>
+                                 <%--   <c:param name="name" value="${faculties.name}"/>  --%>
+                                        <c:param name="command" value="addLocale"/>
+                                     </c:url>">add local name</a>
+                         </td>
+
+                     </c:if>
                      <td>
                          <form action="statement" method="POST">
                              <input type="hidden" name="id" value="${faculties.id}" />
@@ -143,17 +154,12 @@
                                   <c:param name="com" value="getList"/>
                                </c:url>">statement list</a>
                      </td>
+                     <td><a href="<c:url value='/final_list' >
+                                  <c:param name="id" value="${faculties.id}"/>
+                               </c:url>">final list</a>
+                     </td>
                 </c:if>
-                <c:set var="name" value="${faculties.name}" scope="page"/>
-                <c:if test="${ not empty name and name eq 'add locale name' }">
-                    <td><a href="<c:url value='edit_faculty.jsp' >
-                                        <c:param name="id" value="${faculties.id}"/>
-                                 <%--   <c:param name="name" value="${faculties.name}"/>  --%>
-                                        <c:param name="command" value="addLocale"/>
-                                     </c:url>">add local name</a>
-                    </td>
 
-                </c:if>
         </tr>
     </c:forEach>
 </table>

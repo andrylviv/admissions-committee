@@ -34,6 +34,7 @@ public class StatementManager {
         FacultyDAO fd = new FacultyDAO();
         StatementDAO sd = new StatementDAO();
         UserInfoDAO uid = new UserInfoDAO();
+        sd.resetFlag(conn);                                               //reset flags
         List<Faculty> facultyList = fd.findAllFaculty(conn,"en");
         for (Faculty faculty:facultyList) {
             List<Statement> statementList = sd.getApplicant(conn,faculty.getId());
@@ -77,21 +78,14 @@ public class StatementManager {
 
     public static void finalise(Connection connection, List<Applicant> applicantList, Faculty faculty){
 
-        applicantList.sort(Comparator.comparing(Applicant::getMark));
+        applicantList.sort((a, b) -> ((Integer)b.getMark()).compareTo(a.getMark()));
         if (applicantList.size() >= faculty.getTotPlaces()) {
             List<Applicant> applicantListStFoun = applicantList.subList(0, faculty.getStFundedPlaces());
-            List<Applicant> applicantListNonStFoun = applicantList.subList(faculty.getStFundedPlaces() + 1, faculty.getTotPlaces());
+            List<Applicant> applicantListNonStFoun = applicantList.subList(faculty.getStFundedPlaces(), faculty.getTotPlaces());
 
             setStFonPlFlag(connection, applicantListStFoun);
             setNonStFonPlFlag(connection, applicantListNonStFoun);
-         /*   StatementDAO statementDAO = new StatementDAO();
 
-            for (Applicant applicant : applicantListStFoun) {
-                statementDAO.setStFonPl(connection, applicant.getApplicantId(), 1);
-            }
-            for (Applicant applicant : applicantListNonStFoun) {
-                statementDAO.setNonStFonPl(connection, applicant.getApplicantId(), 1);
-            }*/
         }
         if (applicantList.size() <= faculty.getTotPlaces()) {
             if (applicantList.size() >= faculty.getStFundedPlaces()){
@@ -103,7 +97,7 @@ public class StatementManager {
                 setStFonPlFlag(connection, applicantListStFoun);
             }
             if (applicantList.size() >= faculty.getStFundedPlaces()){
-                List<Applicant> applicantListNonStFoun = applicantList.subList(faculty.getStFundedPlaces() + 1, applicantList.size());
+                List<Applicant> applicantListNonStFoun = applicantList.subList(faculty.getStFundedPlaces(), applicantList.size());
                 setNonStFonPlFlag(connection, applicantListNonStFoun);
             }
         }
@@ -112,12 +106,14 @@ public class StatementManager {
         StatementDAO statementDAO = new StatementDAO();
         for (Applicant applicant : applicantListStFoun) {
             statementDAO.setStFonPl(connection, applicant.getApplicantId(), 1);
+            statementDAO.setNonStFonPl(connection, applicant.getApplicantId(), 0);   //erase old flag
         }
     }
     public static void setNonStFonPlFlag(Connection connection, List<Applicant> applicantListNonStFoun){
         StatementDAO statementDAO = new StatementDAO();
         for (Applicant applicant : applicantListNonStFoun) {
             statementDAO.setNonStFonPl(connection, applicant.getApplicantId(), 1);
+            statementDAO.setStFonPl(connection, applicant.getApplicantId(), 0);   //erase old flag
         }
     }
 
@@ -145,5 +141,39 @@ public class StatementManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<UserInfo> getStFondFinalList(int facultyId){
+        final Connection conn = DBManager.getConnection();
+        List<Statement> applicantList = new StatementDAO().getApplicant(conn, facultyId);
+        List<UserInfo> userInfoStFounList = new ArrayList<>();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        for (Statement st:applicantList) {
+            if (st.getStFonPl()==1){
+                userInfoStFounList.add(userInfoDAO.getUserInfo(conn,st.getUserId()));
+            }
+        }try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return userInfoStFounList;
+    }
+
+    public static List<UserInfo> getNonStFondFinalList(int facultyId){
+        final Connection conn = DBManager.getConnection();
+        List<Statement> applicantList = new StatementDAO().getApplicant(conn, facultyId);
+        List<UserInfo> userInfoNonStFounList = new ArrayList<>();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        for (Statement st:applicantList) {
+            if (st.getNonStFonPl()==1){
+                userInfoNonStFounList.add(userInfoDAO.getUserInfo(conn,st.getUserId()));
+            }
+        }try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userInfoNonStFounList;
     }
 }
