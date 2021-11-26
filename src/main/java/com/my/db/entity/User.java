@@ -1,6 +1,8 @@
 package com.my.db.entity;
 
-public class User {
+public class User extends Entity{
+
+    private static final long serialVersionUID = 5456277830808334232L;
     private int id;
     private String email;
     private String password;
@@ -11,7 +13,7 @@ public class User {
     }
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

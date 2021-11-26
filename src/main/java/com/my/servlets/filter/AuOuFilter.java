@@ -48,6 +48,8 @@ public class AuOuFilter implements Filter {
         final Connection conn = (Connection) req.getServletContext().getAttribute("conn");
 
         final HttpSession session = req.getSession();
+        if (!nonNull(session) && !nonNull(session.getAttribute("lang")))
+            req.getSession().setAttribute("lang", "uk");
 
         if (req.getServletPath().equals("/reg_abiturient.jsp")){
            // req.getRequestDispatcher("reg_abiturient.jsp").forward(request, response);

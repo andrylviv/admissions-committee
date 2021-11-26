@@ -1,6 +1,8 @@
 package com.my.db.entity;
 
-public class Statement {
+public class Statement extends Entity{
+
+    private static final long serialVersionUID = 5456277830808334232L;
     int userId;
     int facultyId;
     int stFonPl;

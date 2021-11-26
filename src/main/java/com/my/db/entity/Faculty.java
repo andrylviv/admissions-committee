@@ -1,6 +1,8 @@
 package com.my.db.entity;
 
-public class Faculty {
+public class Faculty extends Entity{
+
+    private static final long serialVersionUID = 5456277830808334232L;
     int id;
     String name;
     int stFundedPlaces;
@@ -22,7 +24,7 @@ public class Faculty {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
