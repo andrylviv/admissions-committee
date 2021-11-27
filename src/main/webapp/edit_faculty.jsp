@@ -16,12 +16,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        p {color:red;}
+    </style>
 </head>
 <body>
 <c:set var="command" value="${param.command}" scope="page"/>
 <c:if test="${ not empty command and command eq 'edit' }">
     <h2>Edit faculty ${param.name}</h2>
-
+<div align="right">
+    <form action="<c:url value='/update_fty' ></c:url>">
+        <input type="hidden" id="facultyId1" name="facultyId" value="${param.id}">
+        <input type="hidden" id="command1" name="command" value="remove">
+        <input type="submit" class="btn btn-danger" value="remove">
+    </form>
+</div>
     <form action="<c:url value='/update_fty' ></c:url>">
         <label for="fname">new faculty name:</label>
         <input type="text" id="nfname" name="fname" required><br><br>
@@ -38,9 +47,12 @@
             <label for="nmath"> eie math</label><br>
             <input type="checkbox" id="nphysics" name="physics" value="1">
             <label for="nphysics"> eie physics</label><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" class="btn btn-success" value="Submit">
     </form>
-
+    <c:set var="wrongCr" value="${param.wrongCr}" scope="page"/>
+    <c:if test="${ not empty wrongCr and wrongCr eq 1 }">
+        <p>wrong credentials</p>
+    </c:if>
 </c:if>
 <c:set var="command" value="${param.command}" scope="page"/>
 <c:if test="${ not empty command and command eq 'add' }">
@@ -62,9 +74,12 @@
             <label for="math"> eie math</label><br>
             <input type="checkbox" id="physics" name="physics" value="1">
             <label for="physics"> eie physics</label><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" class="btn btn-success" value="Submit">
     </form>
-
+    <c:set var="wrongCr" value="${param.wrongCr}" scope="page"/>
+    <c:if test="${ not empty wrongCr and wrongCr eq 1 }">
+        <p>wrong credentials</p>
+    </c:if>
 </c:if>
 
 <c:set var="command" value="${param.command}" scope="page"/>
@@ -78,7 +93,7 @@
         <input type="hidden" id="llang" name="lang" value="${sessionScope.lang}">
         <input type="hidden" id="lfacultyId" name="facultyId" value="${param.id}">
         <input type="hidden" id="lcommand" name="command" value="addLocale">
-        <input type="submit" value="Submit">
+        <input type="submit" class="btn btn-success" value="Submit">
     </form>
 
 </c:if>

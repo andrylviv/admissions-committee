@@ -99,7 +99,7 @@
                                          <input type="hidden" name="id" value="${faculties.id}" />
                                          <input type="hidden" name="facultyName" value="${faculties.name}" />
                                          <input type="hidden" name="command" value="unregister" />
-                                         <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.unregister" bundle = "${lang}"/></a>
+                                         <a href="#" onclick="this.parentNode.submit()" class="btn btn-warning" role="button"><fmt:message key = "label.unregister" bundle = "${lang}"/></a>
                                      </form>
                                  </td>
                         </c:if>
@@ -113,7 +113,7 @@
                                                  <c:param name="eieMath" value="${faculties.isEieMath}"/>
                                                  <c:param name="eiePhysics" value="${faculties.isEiePhysics}"/>
                                                  <c:param name="command" value="register"/>
-                                              </c:url>">register</a>
+                                              </c:url>" class="btn btn-info" role="button"><fmt:message key = "label.register" bundle = "${lang}"/></a>
                                  </td>
                                  <c:set var="fl" value="0" scope="page"/>
                              </c:if>
@@ -127,7 +127,7 @@
                                      <c:param name="id" value="${faculties.id}"/>
                                      <c:param name="name" value="${faculties.name}"/>
                                      <c:param name="command" value="edit"/>
-                                  </c:url>">edit faculty</a>
+                                  </c:url>" class="btn btn-info" role="button">edit faculty</a>
                      </td>
 
                      <c:set var="name" value="${faculties.name}" scope="page"/>
@@ -136,27 +136,34 @@
                                         <c:param name="id" value="${faculties.id}"/>
                                  <%--   <c:param name="name" value="${faculties.name}"/>  --%>
                                         <c:param name="command" value="addLocale"/>
-                                     </c:url>">add local name</a>
+                                     </c:url>" class="btn btn-warning" role="button">add local name</a>
                          </td>
 
                      </c:if>
+                     <td>
+                         <form action="list_user" method="GET">
+                             <input type="hidden" name="facultyId" value="${faculties.id}" />
+                             <input type="hidden" name="command" value="listApplFaculty" />
+                             <a href="#" onclick="this.parentNode.submit()" class="btn btn-info" role="button">applicant list</a>
+                         </form>
+                     </td>
                      <td>
                          <form action="statement" method="POST">
                              <input type="hidden" name="id" value="${faculties.id}" />
                              <input type="hidden" name="name" value="${faculties.name}" />
                              <input type="hidden" name="command" value="ats" />
-                             <a href="#" onclick="this.parentNode.submit()">add to statement</a>
+                             <a href="#" onclick="this.parentNode.submit()" class="btn btn-info" role="button">add to statement</a>
                          </form>
                      </td>
                      <td><a href="<c:url value='/statement' >
                                   <c:param name="id" value="${faculties.id}"/>
                                   <c:param name="name" value="${faculties.name}"/>
                                   <c:param name="com" value="getList"/>
-                               </c:url>">statement list</a>
+                               </c:url>" class="btn btn-info" role="button">statement list</a>
                      </td>
                      <td><a href="<c:url value='/final_list' >
                                   <c:param name="id" value="${faculties.id}"/>
-                               </c:url>">final list</a>
+                               </c:url>" class="btn btn-info" role="button">final list</a>
                      </td>
                 </c:if>
 

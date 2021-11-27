@@ -18,38 +18,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <c:forEach var="ps" items="${param}">
-        <c:out value="${ps.key} : ${ps.value}"/><br/>
-    </c:forEach>
+<%--   <c:forEach var="ps" items="${param}">
+       <c:out value="${ps.key} : ${ps.value}"/><br/>
+   </c:forEach>--%>
+<div class="container">
+    <br>
 <form action="reg_fty" method="POST">
-    <c:set var="eie" value="${param.eieUkLang}" scope="page"/>
-    <c:if test="${ not empty eie and eie eq '1' }">
-        <tr>
-            <td>eie uk lang:</td>
-            <td><input type="number" max="12" min="1" required name="eieUkLang"/></td>
-        </tr>
-    </c:if>
-    <c:set var="eie" value="${param.eieMath}" scope="page"/>
-    <c:if test="${ not empty eie and eie eq '1' }">
-        <tr>
-            <td>eie math:</td>
-            <td><input type="number" max="12" min="1" required name="eieMath"/></td>
-        </tr>
-    </c:if>
-    <c:set var="eie" value="${param.eiePhysics}" scope="page"/>
-    <c:if test="${ not empty eie and eie eq '1' }">
-        <tr>
-            <td>eie physics:</td>
-            <td><input type="number" max="12" min="1" required name="eiePhysics"/></td>
-        </tr>
-    </c:if>
-    <tr>
-        <td>
-            <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
-            <input type="hidden" id="facultyName" name="facultyName" value="${param.facultyName}">
-            <input type="hidden" id="command" name="command" value="${param.command}">
-            <input class="button" type="submit" value="Реєстрація"></td>
-    </tr>
+   <c:set var="eie" value="${param.eieUkLang}" scope="page"/>
+   <c:if test="${ not empty eie and eie eq '1' }">
+       <tr>
+           <td>eie uk lang:</td>
+           <td><input type="number" max="12" min="1" required name="eieUkLang"/></td>
+       </tr>
+   </c:if>
+   <c:set var="eie" value="${param.eieMath}" scope="page"/>
+   <c:if test="${ not empty eie and eie eq '1' }">
+       <tr>
+           <td>eie math:</td>
+           <td><input type="number" max="12" min="1" required name="eieMath"/></td>
+       </tr>
+   </c:if>
+   <c:set var="eie" value="${param.eiePhysics}" scope="page"/>
+   <c:if test="${ not empty eie and eie eq '1' }">
+       <tr>
+           <td>eie physics:</td>
+           <td><input type="number" max="12" min="1" required name="eiePhysics"/></td>
+       </tr>
+   </c:if>
+   <tr>
+       <td>
+           <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
+           <input type="hidden" id="facultyName" name="facultyName" value="${param.facultyName}">
+           <input type="hidden" id="command" name="command" value="${param.command}">
+           <input class="button" type="submit" value="Реєстрація"></td>
+   </tr>
 </form>
+</div>
 </body>
 </html>

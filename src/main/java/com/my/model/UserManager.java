@@ -1,15 +1,14 @@
 package com.my.model;
 
-import com.my.db.DBManager;
-import com.my.db.FacultyDAO;
-import com.my.db.UserDAO;
-import com.my.db.UserInfoDAO;
+import com.my.db.*;
 import com.my.db.entity.Faculty;
 import com.my.db.entity.User;
+import com.my.db.entity.UserFaculty;
 import com.my.db.entity.UserInfo;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
@@ -72,4 +71,15 @@ public class UserManager {
             e.printStackTrace();
         }
     return true;}
+
+    public static List<UserInfo> getApplicantFaculty(int fId){
+        final Connection conn = DBManager.getConnection();
+        List<UserFaculty> userList = new UserFacultyDAO().getApplicant(conn,fId);
+        List<UserInfo> userInfoList = new ArrayList<>();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        for (UserFaculty uf:userList) {
+            userInfoList.add(userInfoDAO.getUserInfo(conn,uf.getUserId()));
+        }
+        return userInfoList;
+    }
 }

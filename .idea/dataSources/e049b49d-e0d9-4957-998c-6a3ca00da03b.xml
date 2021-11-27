@@ -1216,6 +1216,7 @@
       <RefSchemaName>admissions_committee</RefSchemaName>
       <RefTableName>faculty</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="306" parent="285" name="fk_faculty_translate_language1">
       <ColNames>language_id</ColNames>
@@ -1280,12 +1281,14 @@ faculty_id</ColNames>
       <RefSchemaName>admissions_committee</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="318" parent="287" name="fk_statement_faculty1">
       <ColNames>faculty_id</ColNames>
       <RefSchemaName>admissions_committee</RefSchemaName>
       <RefTableName>faculty</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <column id="319" parent="288" name="id">
       <Position>1</Position>
@@ -1356,6 +1359,7 @@ faculty_id</ColNames>
       <RefSchemaName>admissions_committee</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
     </foreign-key>
     <foreign-key id="332" parent="289" name="user_faculty_ibfk_2">
       <ColNames>faculty_id</ColNames>

@@ -97,7 +97,7 @@
           <td><input type="number" max="12" min="1" required name="eie math"/></td>
       </tr>  --%>
       <tr>
-          <td><input class="button" type="submit" value="Реєстрація"></td>
+          <td><input class="btn btn-info" type="submit" value="Реєстрація"></td>
       </tr>
   </table>
 </form>

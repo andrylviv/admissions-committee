@@ -18,6 +18,7 @@ public class FacultyDAO {
     public static final String INSERT_FACULTY = "INSERT INTO faculty(st_funded_places,tot_places,eie_uk_lang,eie_math,eie_physics) VALUES (?,?,?,?,?)";
     public static final String INSERT_FACULTY_TRANSLATION = "INSERT INTO faculty_translate(faculty_id, faculty_name,language_id) VALUES (?,?,?)";
     public static final String GET_FACULTY_BY_ID = "SELECT * FROM faculty WHERE id=?";
+    public static final String REMOVE_FACULTY= "DELETE FROM faculty WHERE id =?";
 
     public Faculty  getFacultyById(Connection conn,int id){
         Faculty faculty = new Faculty();
@@ -155,4 +156,14 @@ public class FacultyDAO {
         }
     }
 
+    public void  removeFaculty(Connection conn,int id){
+        try{
+            PreparedStatement stat = conn.prepareStatement(REMOVE_FACULTY);
+            stat.setInt(1,id);
+
+            stat.executeUpdate();
+        } catch (SQLException e) {
+            //add logger
+        }
+    }
 }

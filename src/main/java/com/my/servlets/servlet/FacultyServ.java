@@ -38,28 +38,31 @@ import static java.util.Objects.nonNull;
                      physics = Integer.valueOf(req.getParameter("physics"));
                 System.out.println(physics);
                 if (req.getParameter("command").equals("edit")) {
-                    FacultyManager.updateFaculty(id, stfpl, totpl, name, lang, ukLang, math, physics);
-                    req.getSession().removeAttribute("faculties");
-                    req.getRequestDispatcher("/list").forward(req, resp);
+                    if (stfpl>totpl) {
+                        req.setAttribute("wrongCr",1);
+                        req.getRequestDispatcher("/edit_faculty.jsp").forward(req, resp);
+                    }
+                    if (stfpl<=totpl) {
+                        FacultyManager.updateFaculty(id, stfpl, totpl, name, lang, ukLang, math, physics);
+                        req.setAttribute("wrongCr",0);
+                        req.getSession().removeAttribute("faculties");
+                        req.getRequestDispatcher("/list").forward(req, resp);
+                    }
                 }
                 if (req.getParameter("command").equals("add")) {
-                    FacultyManager.addFaculty(stfpl, totpl, name, lang, ukLang, math, physics);
-                    req.getSession().removeAttribute("faculties");
-                    req.getRequestDispatcher("/list").forward(req, resp);
+                    if (stfpl>totpl) {
+                        req.setAttribute("wrongCr",1);
+                        req.getRequestDispatcher("/edit_faculty.jsp").forward(req, resp);
+                    }
+                    if (stfpl<=totpl) {
+                        FacultyManager.addFaculty(stfpl, totpl, name, lang, ukLang, math, physics);
+                        req.setAttribute("wrongCr",0);
+                        req.getSession().removeAttribute("faculties");
+                        req.getRequestDispatcher("/list").forward(req, resp);
+                    }
                 }
             }
-           /* if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("add")) {
-                String name = req.getParameter("fname");
-                int stfpl = Integer.valueOf(req.getParameter("stfpl"));
-                int totpl = Integer.valueOf(req.getParameter("totpl"));
-                String lang = req.getParameter("lang");
-                int ukLang = Integer.valueOf(req.getParameter("ukLang"));
-                int math = Integer.valueOf(req.getParameter("math"));
-                int physics = Integer.valueOf(req.getParameter("physics"));
-                FacultyManager.addFaculty(stfpl, totpl, name, lang, ukLang, math, physics);
-                req.getSession().removeAttribute("faculties");
-                req.getRequestDispatcher("/list").forward(req, resp);
-            }*/
+
             if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("addLocale")) {
                 int id = Integer.valueOf(req.getParameter("facultyId"));
                 String name = req.getParameter("fname");
@@ -68,5 +71,13 @@ import static java.util.Objects.nonNull;
                 req.getSession().removeAttribute("faculties");
                 req.getRequestDispatcher("/list").forward(req, resp);
             }
+
+            if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("remove")) {
+                int id = Integer.valueOf(req.getParameter("facultyId"));
+                FacultyManager.removeFaculty(id);
+                req.getSession().removeAttribute("faculties");
+                req.getRequestDispatcher("/list").forward(req, resp);
+            }
+
         }
 }

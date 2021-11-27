@@ -49,5 +49,10 @@ public class ListUserServ extends HttpServlet {
             req.setAttribute("user", UserManager.getUser(id));
             req.getRequestDispatcher("user_info.jsp").forward(req, resp);
         }
+        if (nonNull(req.getParameter("command")) && req.getParameter("command").equals("listApplFaculty")) {
+            List<UserInfo> userInfoList = UserManager.getApplicantFaculty(Integer.valueOf(req.getParameter("facultyId")));
+            req.setAttribute("userInfoList", userInfoList);
+            req.getRequestDispatcher("app_faculty_list.jsp").forward(req, resp);
+        }
     }
 }

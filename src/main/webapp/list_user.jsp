@@ -20,14 +20,14 @@
 <body>
 <table>
     <tr>
-<%--    <th>Id</th>  --%>
+        <th>Id</th>
         <th>Name</th>
         <th>Last name</th>
         <th>Partonymic</th>
     </tr>
     <c:forEach var="usersInfo" items="${usersInfo}" varStatus="status">
         <tr>
-        <%--   <td><c:out value="${ usersInfo.id }" /></td>  --%>
+               <td><c:out value="${ usersInfo.userId }" /></td>
                <td><c:out value="${ usersInfo.firstName }" /></td>
                <td><c:out value="${ usersInfo.lastName }" /></td>
                <td><c:out value="${ usersInfo.partonymic }" /></td>

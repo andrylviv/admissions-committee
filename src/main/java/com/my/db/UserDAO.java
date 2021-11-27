@@ -13,7 +13,7 @@ import static com.my.db.DBManager.getConnection;
 
 public class UserDAO {
 
-    public static final String INSERT_USER = "INSERT INTO user(email,is_admin,password) VALUES (?,?,?)";
+    public static final String INSERT_USER = "INSERT INTO user(email,is_admin,password,is_blocked) VALUES (?,?,?,?)";
     public static final String GET_USER = "SELECT * FROM user WHERE email=? and password=?";
     public static final String USER_EXIST = "SELECT * FROM user WHERE email=? and password=?";
     public static final String GET_ALL_USERS = "SELECT * FROM user WHERE is_admin=0";
@@ -26,6 +26,7 @@ public class UserDAO {
             stat.setString(1,user.getEmail());
             stat.setString(2,String.valueOf(user.getIsAdmin()));
             stat.setString(3,Password.hash(user.getPassword()));
+            stat.setInt(4,0);
             stat.executeUpdate();
             try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -33,6 +34,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
             //add logger
         }
     }

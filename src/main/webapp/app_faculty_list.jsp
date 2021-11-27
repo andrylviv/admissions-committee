@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: andry
-  Date: 24.11.2021
-  Time: 12:19
+  Date: 27.11.2021
+  Time: 17:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -22,20 +22,12 @@
         <th>Last name</th>
         <th>Partonymic</th>
     </tr>
-    <c:forEach var="userInfoList" items="${sessionScope.userInfoList}" varStatus="status">
+    <c:forEach var="userInfoList" items="${requestScope.userInfoList}" varStatus="status">
         <tr>
             <td><c:out value="${ userInfoList.userId }" /></td>
             <td><c:out value="${ userInfoList.firstName }" /></td>
             <td><c:out value="${ userInfoList.lastName }" /></td>
             <td><c:out value="${ userInfoList.partonymic }" /></td>
-                    <td>
-                        <form action="statement" method="POST">
-                            <input type="hidden" name="userId" value="${userInfoList.userId}" />
-                            <input type="hidden" name="fId" value="${param.id}" />
-                            <input type="hidden" name="command" value="delete" />
-                            <a href="#" onclick="this.parentNode.submit()">delete</a>
-                        </form>
-                    </td>
         </tr>
     </c:forEach>
 </table>

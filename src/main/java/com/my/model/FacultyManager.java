@@ -59,4 +59,15 @@ public class FacultyManager {
             e.printStackTrace();
         }
     }
+
+    public static void removeFaculty(int id){
+        Connection conn  = DBManager.getConnection();
+
+        new FacultyDAO().removeFaculty(conn,id);
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

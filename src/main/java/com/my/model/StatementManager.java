@@ -48,7 +48,10 @@ public class StatementManager {
                 applicantList.add(applicant);
             }
             finalise(conn, applicantList, faculty);
-
+        }try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
