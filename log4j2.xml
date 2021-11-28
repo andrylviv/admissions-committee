@@ -10,7 +10,7 @@
         <Logger name="anLog" level="debug" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Root level="error">
+        <Root level="trace">
             <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>

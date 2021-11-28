@@ -4,7 +4,8 @@ import com.my.db.UserDAO;
 import com.my.db.UserInfoDAO;
 import com.my.db.entity.User;
 import com.my.model.Password;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,6 +23,7 @@ import static java.util.Objects.nonNull;
  */
 @WebFilter("/*")
 public class AuOuFilter implements Filter {
+    private static final Logger logger = LogManager.getLogger(AuOuFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -52,69 +54,45 @@ public class AuOuFilter implements Filter {
             req.getSession().setAttribute("lang", "uk");
 
         if (req.getServletPath().equals("/reg_abiturient.jsp")){
-           // req.getRequestDispatcher("reg_abiturient.jsp").forward(request, response);
-
-           /* session.removeAttribute("email");
-            session.removeAttribute("isAdmin");*/
             chain.doFilter(request, response);
         }
-       /* System.out.println(req.getServletPath());
-        System.out.println(req.getRequestURL());
-        System.out.println(req.getServletPath());*/
-        if (req.getServletPath().equals("/reg_abiturient")){
 
-           /* session.removeAttribute("email");
-            session.removeAttribute("isAdmin");*/
+        if (req.getServletPath().equals("/reg_abiturient")){
             req.getRequestDispatcher("reg_abiturient").forward(request, response);
         }
 
         if (req.getServletPath().equals("/lang_ch")){
-
-           /* session.removeAttribute("email");
-            session.removeAttribute("isAdmin");*/
             req.getRequestDispatcher("lang_ch").forward(request, response);
         }
 
         //Logged user.
-        if (nonNull(session) &&
-            nonNull(session.getAttribute("email"))
-            //&& nonNull(session.getAttribute("password"))
-        ) {
-
+        if (nonNull(session) && nonNull(session.getAttribute("email"))) {
             final int isAdmin = (int) session.getAttribute("isAdmin");
-            System.out.println(isAdmin+"l");
-           // moveTo(req, res, isAdmin);
+            logger.trace(isAdmin+"l");
             chain.doFilter(request, response);
 
         } else if (new UserDAO().ifUserExist(conn,email, password)) {
-
             User us = new UserDAO().getUser(conn,email, password);
             final int isAdmin = us.getIsAdmin();
             final int id = us.getId();
             final int isBlocked = us.getIsBlocked();
 
             String name = new UserInfoDAO().getUserName(conn,id);
-            System.out.println(isAdmin+"iex");
-            //req.getSession().setAttribute("password", password);
+            logger.trace(isAdmin+"iex");
             req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("isAdmin", isAdmin);
             req.getSession().setAttribute("id", id);
             req.getSession().setAttribute("name", name);
             req.getSession().setAttribute("isBlocked", isBlocked);
 
-           /* if (req.getServletPath().equals("/reg_abiturient")){
-                req.getRequestDispatcher("reg_abiturient").forward(request, response);// after registr for PRG work
-            }*/
-            if(!response.isCommitted())
-            {
+            if(!response.isCommitted()) {
                 moveTo(req, res, isAdmin);
             }
-
 
         } else if (!req.getServletPath().equals("/reg_abiturient")
                  &&!req.getServletPath().equals("/reg_abiturient.jsp")
                  &&!req.getServletPath().equals("/lang_ch")){
-            System.out.println(-1+"aouf");
+            logger.trace(-1+"aouf");
             moveTo(req, res, -1);
         }
     }
@@ -129,18 +107,14 @@ public class AuOuFilter implements Filter {
                         final int isAdmin)
             throws ServletException, IOException {
 
-
         if (isAdmin==1) {
-
             req.getRequestDispatcher("admin_menu.jsp").forward(req, res);
-            //res.sendRedirect("admin_menu.jsp");
-        } else if (isAdmin==0) {
 
+        } else if (isAdmin==0) {
             req.getRequestDispatcher("abiturient_menu.jsp").forward(req, res);
 
         } else {
-
-            System.out.println("in-1");
+            logger.trace("in-1");
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
     }
@@ -148,5 +122,4 @@ public class AuOuFilter implements Filter {
     @Override
     public void destroy() {
     }
-
 }

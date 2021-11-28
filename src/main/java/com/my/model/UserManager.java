@@ -79,6 +79,10 @@ public class UserManager {
         UserInfoDAO userInfoDAO = new UserInfoDAO();
         for (UserFaculty uf:userList) {
             userInfoList.add(userInfoDAO.getUserInfo(conn,uf.getUserId()));
+        }try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return userInfoList;
     }

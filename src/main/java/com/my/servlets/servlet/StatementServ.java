@@ -2,6 +2,8 @@ package com.my.servlets.servlet;
 
 import com.my.db.entity.UserInfo;
 import com.my.model.StatementManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import static java.util.Objects.nonNull;
 
 @WebServlet("/statement")
 public class StatementServ extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger(StatementServ.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,7 +66,7 @@ public class StatementServ extends HttpServlet {
         }
     }
         void exec(HttpServletRequest req, HttpServletResponse resp,List<UserInfo> userInfoList){
-        System.out.println("inGL");
+            logger.trace("in_statement");
 
             req.getSession().setAttribute("userInfoList", userInfoList);
             try {
