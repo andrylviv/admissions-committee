@@ -1,4 +1,4 @@
-package com.my.model;
+package com.my.service;
 
 import com.my.db.*;
 import com.my.db.entity.Faculty;
@@ -9,7 +9,6 @@ import com.my.db.entity.UserInfo;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class StatementManager {

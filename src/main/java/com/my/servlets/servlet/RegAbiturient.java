@@ -1,6 +1,6 @@
 package com.my.servlets.servlet;
 
-import com.my.model.RegAbit;
+import com.my.service.RegAbit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -15,26 +15,7 @@
 </head>
 <body>
 <div align="right">
-<%--
-<c:set var="user" value="${sessionScope.lang}" scope="page"/>
-<c:if test="${ not empty user and user eq 'uk' }">
-   <a href="<c:url value='lang_ch' >
-                                   <c:param name="lang" value="en"/>
-                                   <c:param name="name" value=""/>
-                                   <c:param name="uriVal" value="${pageContext.request.requestURI}"/>
-                                </c:url>">en</a>
-</c:if>
 
-<c:set var="user" value="${sessionScope.lang}" scope="page"/>
-<c:if test="${ not empty user and user eq 'en' }">
-  <a href="<c:url value='lang_ch' >
-                                   <c:param name="lang" value="uk"/>
-                                   <c:param name="name" value=""/>
-                                   <c:param name="uriVal" value="${pageContext.request.requestURI}"/>
-                                </c:url>">uk</a>
-</c:if>
-
---%>
   <c:set var="user" value="${sessionScope.lang}" scope="page"/>
   <c:if test="${ not empty user and user eq 'uk' }">
       <form action="lang_ch" method="POST">

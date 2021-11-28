@@ -1,6 +1,9 @@
 package com.my.servlets;
 
 import com.my.db.DBManager;
+import com.my.servlets.servlet.StatementServ;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -12,18 +15,15 @@ import java.sql.SQLException;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
+    private static final Logger logger = LogManager.getLogger(ContextListener.class);
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext ctx = servletContextEvent.getServletContext();
 
-       /* String url = ctx.getInitParameter("DBURL");
-        String u = ctx.getInitParameter("DBUSER");
-        String p = ctx.getInitParameter("DBPWD");*/
-
         //create database connection from init parameters and set it to context
         Connection conn = DBManager.getConnection();
         ctx.setAttribute("conn", conn);
-        System.out.println("Database connection initialized for Application.");
+        logger.trace("Database connection initialized for Application.");
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -34,7 +34,7 @@ public class ContextListener implements ServletContextListener {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Database connection closed for Application.");
+        logger.trace("Database connection closed for Application.");
 
     }
 

@@ -1,8 +1,7 @@
-package com.my.model;
+package com.my.service;
 
 import com.my.db.DBManager;
 import com.my.db.UserDAO;
-import com.my.db.UserFacultyDAO;
 import com.my.db.UserInfoDAO;
 import com.my.db.entity.User;
 import com.my.db.entity.UserInfo;

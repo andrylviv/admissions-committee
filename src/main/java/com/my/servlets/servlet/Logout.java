@@ -18,18 +18,14 @@ public class Logout extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-
         final HttpSession session = req.getSession();
 
-        //session.removeAttribute("password");
         session.removeAttribute("email");
         session.removeAttribute("isAdmin");
         session.removeAttribute("faculties");
         //session.removeAttribute("lang");
         //session.invalidate();
         resp.sendRedirect(super.getServletContext().getContextPath());
-       // resp.sendRedirect("login.jsp");
-        // resp.sendRedirect("/");
     }
 
 }

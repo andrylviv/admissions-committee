@@ -1,7 +1,7 @@
 package com.my.servlets.servlet;
 
 import com.my.db.entity.UserInfo;
-import com.my.model.StatementManager;
+import com.my.service.StatementManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,9 +39,8 @@ public class StatementServ extends HttpServlet {
             if (!req.getParameter("fId").equals(""))
                 req.getSession().setAttribute("faculSid",req.getParameter("fId"));
             req.getSession().removeAttribute("com");
-            //req.getSession().removeAttribute("fin");
+
             resp.sendRedirect("statement");
-            //req.getRequestDispatcher("statement").forward(req,resp);
         }
     }
 

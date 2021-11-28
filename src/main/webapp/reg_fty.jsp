@@ -18,9 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%--   <c:forEach var="ps" items="${param}">
-       <c:out value="${ps.key} : ${ps.value}"/><br/>
-   </c:forEach>--%>
+
 <div class="container">
     <br>
 <form action="reg_fty" method="POST">

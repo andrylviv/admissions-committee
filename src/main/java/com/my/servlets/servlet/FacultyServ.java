@@ -1,6 +1,6 @@
 package com.my.servlets.servlet;
 
-import com.my.model.FacultyManager;
+import com.my.service.FacultyManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -3,7 +3,7 @@ package com.my.servlets.filter;
 import com.my.db.UserDAO;
 import com.my.db.UserInfoDAO;
 import com.my.db.entity.User;
-import com.my.model.Password;
+import com.my.service.Password;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

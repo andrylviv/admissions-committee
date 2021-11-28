@@ -1,4 +1,4 @@
-package com.my.model;
+package com.my.service;
 
 public class Applicant {
     int applicantId;

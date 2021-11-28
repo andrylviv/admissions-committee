@@ -1,22 +1,17 @@
 package com.my.db;
 
 import com.my.db.entity.User;
-import com.my.model.Password;
+import com.my.service.Password;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.my.db.DBManager.getConnection;
 
 public class UserDAO {
 
     public static final String INSERT_USER = "INSERT INTO user(email,is_admin,password,is_blocked) VALUES (?,?,?,?)";
     public static final String GET_USER = "SELECT * FROM user WHERE email=? and password=?";
     public static final String USER_EXIST = "SELECT * FROM user WHERE email=? and password=?";
-    public static final String GET_ALL_USERS = "SELECT * FROM user WHERE is_admin=0";
     public static final String GET_USER_BY_ID = "SELECT * FROM user WHERE id=?";
     public static final String INSERT_BLOCK_FLAG = "UPDATE user SET is_blocked = ? WHERE id = ?";
 
@@ -39,31 +34,9 @@ public class UserDAO {
         }
     }
 
-    public List<User> findAllUsers(){
-        List<User> userList = new ArrayList<>();
-        try(Connection conn = getConnection();
-            Statement stat=conn.createStatement();
-            ResultSet resultSet=stat.executeQuery(GET_ALL_USERS)) {
-
-            while (resultSet.next()){
-                User user = new User();
-                user.setId(resultSet.getInt(1));
-                user.setEmail(resultSet.getString(2));
-                user.setIsAdmin(resultSet.getInt(3));
-
-                userList.add(user);
-            }
-
-
-        } catch (SQLException e) {
-            //add logger
-        }
-        return userList;
-    }
     public User  getUser(Connection conn,String em,String pass){
         User us = new User();
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_USER)) {
+        try(PreparedStatement stat = conn.prepareStatement(GET_USER)) {
 
             stat.setString(1,em);
             stat.setString(2,pass);
@@ -113,10 +86,7 @@ public class UserDAO {
             stat.setString(2,pass);
             try(ResultSet resultSet = stat.executeQuery()) {
                 while (resultSet.next()) {
-                   // us.setId(resultSet.getInt(1));
                     us.setEmail(resultSet.getString(2));
-
-                   // us.setIsAdmin(resultSet.getInt(3));
                     us.setPassword(resultSet.getString(4));
                 }
             }

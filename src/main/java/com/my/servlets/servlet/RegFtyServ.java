@@ -1,7 +1,7 @@
 package com.my.servlets.servlet;
 
-import com.my.model.RegAbitFlty;
-import com.my.model.UserManager;
+import com.my.service.RegAbitFlty;
+import com.my.service.UserManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

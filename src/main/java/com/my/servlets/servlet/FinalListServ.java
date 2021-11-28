@@ -1,7 +1,7 @@
 package com.my.servlets.servlet;
 
 import com.my.db.entity.UserInfo;
-import com.my.model.StatementManager;
+import com.my.service.StatementManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

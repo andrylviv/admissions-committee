@@ -2,7 +2,7 @@ package com.my.servlets.servlet;
 
 import com.my.db.UserFacultyDAO;
 import com.my.db.entity.Faculty;
-import com.my.model.FacultyList;
+import com.my.service.FacultyList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

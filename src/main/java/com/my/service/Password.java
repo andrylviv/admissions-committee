@@ -1,4 +1,4 @@
-package com.my.model;
+package com.my.service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

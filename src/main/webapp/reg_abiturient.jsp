@@ -88,14 +88,7 @@
             <td>physics:</td>
             <td><input type="number" max="12" min="1" required name="physics"/></td>
         </tr>
-<%--  <tr>
-          <td>eie uk lang:</td>
-          <td><input type="number" max="12" min="1" required name="eie uk lang"/></td>
-      </tr>
-      <tr>
-          <td>eie math:</td>
-          <td><input type="number" max="12" min="1" required name="eie math"/></td>
-      </tr>  --%>
+
       <tr>
           <td><input class="btn btn-info" type="submit" value="Реєстрація"></td>
       </tr>

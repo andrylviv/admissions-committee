@@ -1,4 +1,4 @@
-package com.my.model;
+package com.my.service;
 
 import com.my.db.DBManager;
 import com.my.db.UserFacultyDAO;
