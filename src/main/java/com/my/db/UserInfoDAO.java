@@ -19,8 +19,7 @@ public class UserInfoDAO {
     public static final String INSERT_EIE_PHYSICS = "UPDATE user_info SET eie_physics = ? WHERE user_id = ?";
 
     public void  insertUserInf(Connection conn,User user, UserInfo userInfo){
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(INSERT_USER_INFO)) {
+        try(PreparedStatement stat = conn.prepareStatement(INSERT_USER_INFO)) {
 
             stat.setString(1,userInfo.getFirstName());
             stat.setString(2,userInfo.getLastName());
@@ -37,18 +36,12 @@ public class UserInfoDAO {
             stat.setInt(13,userInfo.getUkHistory());
             stat.setInt(14,userInfo.getPhTraining());
             stat.setInt(15,userInfo.getPhysics());
-           /* stat.setInt(16,userInfo.getEieUkLang());
-            stat.setInt(17,userInfo.getEieMath());*/
             stat.setInt(18,user.getId());
 
             stat.executeUpdate();
-          /*  try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    user.setIsAdmin(generatedKeys.getInt(1));
-                }
-            }*/
+
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 
@@ -56,8 +49,7 @@ public class UserInfoDAO {
 
         List<UserInfo> userList = new ArrayList<>();
 
-        try(//Connection conn = getConnection();
-            Statement stat=conn.createStatement()) {
+        try(Statement stat=conn.createStatement()) {
 
             ResultSet resultSet=stat.executeQuery(GET_USER_INFO_LIST);
 
@@ -85,9 +77,8 @@ public class UserInfoDAO {
                 userInfo.setUserId(resultSet.getInt(20));
                 userList.add(userInfo);
             }
-
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return userList;
     }
@@ -95,9 +86,7 @@ public class UserInfoDAO {
     public UserInfo getUserInfo(Connection conn,int id){
         UserInfo userInfo = new UserInfo();
 
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_USER_INFO)) {
-
+        try(PreparedStatement stat = conn.prepareStatement(GET_USER_INFO)) {
 
             stat.setInt(1,id);
 
@@ -128,26 +117,24 @@ public class UserInfoDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return userInfo;
     }
 
     public String  getUserName(Connection conn,int id){
         String name = "";
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_USER_NAME)) {
+        try(PreparedStatement stat = conn.prepareStatement(GET_USER_NAME)) {
 
             stat.setInt(1,id);
 
             try(ResultSet resultSet = stat.executeQuery()) {
                 while (resultSet.next()) {
                     name = resultSet.getString(2);
-
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return name;
     }

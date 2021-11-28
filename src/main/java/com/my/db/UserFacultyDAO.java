@@ -20,7 +20,7 @@ public class UserFacultyDAO {
             stat.executeUpdate();
 
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 
@@ -31,7 +31,7 @@ public class UserFacultyDAO {
             stat.setInt(2,userFaculty.getFacultyId());
             stat.executeUpdate();
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +49,7 @@ public class UserFacultyDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return userList;
     }
@@ -68,7 +68,7 @@ public class UserFacultyDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return userFacultyListList;
     }

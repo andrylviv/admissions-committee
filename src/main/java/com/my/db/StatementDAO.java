@@ -30,7 +30,6 @@ public class StatementDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            //add logger
         }
         return uId>0;
     }
@@ -63,7 +62,7 @@ public class StatementDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return applicantList;
     }
@@ -75,7 +74,7 @@ public class StatementDAO {
 
             stat.executeUpdate();
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 

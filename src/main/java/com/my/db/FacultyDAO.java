@@ -36,7 +36,7 @@ public class FacultyDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return faculty;
     }
@@ -59,8 +59,7 @@ public class FacultyDAO {
 
     public List<Faculty> findAllFaculty(Connection conn,String lang){
         List<Faculty> teamList = new ArrayList<>();
-        try(//Connection conn = getConnection();
-            Statement stat=conn.createStatement();
+        try(Statement stat=conn.createStatement();
             ResultSet resultSet=stat.executeQuery(GET_FACULTY)) {
 
             PreparedStatement prSt1 = conn.prepareStatement(GET_FACULTY_NAME);  //refactor
@@ -69,7 +68,6 @@ public class FacultyDAO {
                 Faculty faculty = new Faculty();
                 int id = resultSet.getInt(1);
                 faculty.setId(id);
-                //faculty.setName(resultSet.getString(1));
                 prSt1.setInt(1,id);
                 prSt1.setInt(2,getLangId(conn, lang));
                 ResultSet rsi = prSt1.executeQuery();
@@ -87,7 +85,6 @@ public class FacultyDAO {
             }
 
         } catch (SQLException e) {
-            //add logger
             e.printStackTrace();
         }
         return teamList;
@@ -112,7 +109,7 @@ public class FacultyDAO {
                 prSt.executeUpdate();
 
         } catch (SQLException e) {
-            //add logger
+
             e.printStackTrace();
         }finally {
             try {
@@ -140,7 +137,7 @@ public class FacultyDAO {
             }
 
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 
@@ -152,7 +149,7 @@ public class FacultyDAO {
             stat.setInt(3,getLangId(conn, faculty.getLangName()));
             stat.executeUpdate();
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 
@@ -163,7 +160,7 @@ public class FacultyDAO {
 
             stat.executeUpdate();
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
     }
 }

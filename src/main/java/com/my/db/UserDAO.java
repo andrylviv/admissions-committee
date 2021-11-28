@@ -30,7 +30,6 @@ public class UserDAO {
             }
         } catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
-            //add logger
         }
     }
 
@@ -51,15 +50,14 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return us;
     }
 
     public User  getUserById(Connection conn,int id){
         User us = new User();
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_USER_BY_ID)) {
+        try(PreparedStatement stat = conn.prepareStatement(GET_USER_BY_ID)) {
             stat.setInt(1,id);
             try(ResultSet resultSet = stat.executeQuery()) {
                 while (resultSet.next()) {
@@ -72,15 +70,14 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
         return us;
     }
 
     public boolean  ifUserExist(Connection conn,String em,String pass){
         User us = new User();
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(USER_EXIST)) {
+        try(PreparedStatement stat = conn.prepareStatement(USER_EXIST)) {
 
             stat.setString(1,em);
             stat.setString(2,pass);
@@ -91,7 +88,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            //add logger
+            e.printStackTrace();
         }
 
         return us.getEmail()!=null&&us.getPassword()!=null;
