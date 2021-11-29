@@ -5,6 +5,7 @@ import com.my.db.entity.Faculty;
 import com.my.db.entity.Statement;
 import com.my.db.entity.UserFaculty;
 import com.my.db.entity.UserInfo;
+import com.my.model.Applicant;
 
 import java.sql.Connection;
 import java.sql.SQLException;

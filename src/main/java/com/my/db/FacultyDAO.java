@@ -22,8 +22,7 @@ public class FacultyDAO {
 
     public Faculty  getFacultyById(Connection conn,int id){
         Faculty faculty = new Faculty();
-        try(//Connection conn = getConnection();
-            PreparedStatement stat = conn.prepareStatement(GET_FACULTY_BY_ID)) {
+        try(PreparedStatement stat = conn.prepareStatement(GET_FACULTY_BY_ID)) {
             stat.setInt(1,id);
             try(ResultSet resultSet = stat.executeQuery()) {
                 while (resultSet.next()) {
