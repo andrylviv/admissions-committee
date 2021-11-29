@@ -1,7 +1,7 @@
 package com.my.servlets.filter;
 
-import com.my.db.UserDAO;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
 
 import static java.util.Objects.nonNull;
-
 
 /**
  * Acidification filter.
@@ -20,6 +18,7 @@ import static java.util.Objects.nonNull;
 
 @WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp","/edit_faculty.jsp" })
 public class AbFilter implements Filter {
+    private static final Logger logger = LogManager.getLogger(AbFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,12 +39,12 @@ public class AbFilter implements Filter {
          isAdmin = (int) session.getAttribute("isAdmin");
 
         if (isAdmin==0) {
-            System.out.println(isAdmin+"inabf");
-            System.out.println(req.getHeader("Referer"));
+            logger.trace(isAdmin+"inabf");
+            logger.trace(req.getHeader("Referer"));
         req.getRequestDispatcher("err.jsp").forward(req, res);
         }
         if (isAdmin==-1) {
-            System.out.println(isAdmin+"inabf");
+            logger.trace(isAdmin+"inabf");
 
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
