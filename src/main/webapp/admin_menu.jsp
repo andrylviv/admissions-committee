@@ -24,23 +24,27 @@
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "pagecontent" var = "lang"/>
 <div align="right">
-    <c:set var="user" value="${sessionScope.lang}" scope="page"/>
-    <c:if test="${ not empty user and user eq 'uk' }">
-        <a href="<c:url value='lang_ch' >
-                                     <c:param name="lang" value="en"/>
-                                     <c:param name="name" value=""/>
-                                     <c:param name="uriVal" value="admin_menu.jsp"/>
-                                  </c:url>">en</a>
-    </c:if>
+    <jsp:include page="langChange.jsp" />
+    <%--   <c:set var="user" value="${sessionScope.lang}" scope="page"/>
+       <c:if test="${ empty user }">
+           <c:set var="user" value="uk" scope="page"/>
+       </c:if>
+       <c:if test="${ not empty user and user eq 'uk' }">
+           <a href="<c:url value='lang_ch' >
+                                        <c:param name="lang" value="en"/>
+                                        <c:param name="name" value=""/>
+                                        <c:param name="uriVal" value="admin_menu.jsp"/>
+                                     </c:url>">en</a>
+       </c:if>
 
-    <c:set var="user" value="${sessionScope.lang}" scope="page"/>
-    <c:if test="${ not empty user and user eq 'en' }">
-        <a href="<c:url value='lang_ch' >
-                                     <c:param name="lang" value="uk"/>
-                                     <c:param name="name" value=""/>
-                                     <c:param name="uriVal" value="admin_menu.jsp"/>
-                                  </c:url>">uk</a>
-    </c:if>
+       <c:set var="user" value="${sessionScope.lang}" scope="page"/>
+       <c:if test="${ not empty user and user eq 'en' }">
+           <a href="<c:url value='lang_ch' >
+                                        <c:param name="lang" value="uk"/>
+                                        <c:param name="name" value=""/>
+                                        <c:param name="uriVal" value="admin_menu.jsp"/>
+                                     </c:url>">uk</a>
+       </c:if>--%>
 </div>
 <h2>Hello ADMIN!</h2>
 <a href="<c:url value='/list_user'>

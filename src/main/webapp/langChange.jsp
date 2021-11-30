@@ -16,8 +16,11 @@
 <body>
 <div align="right">
 
-  <c:set var="user" value="${sessionScope.lang}" scope="page"/>
-  <c:if test="${ not empty user and user eq 'uk' }">
+<c:set var="user" value="${sessionScope.lang}" scope="page"/>
+<c:if test="${ empty user }">
+    <c:set var="user" value="uk" scope="page"/>
+</c:if>
+<c:if test="${ not empty user and user eq 'uk' }">
       <form action="lang_ch" method="POST">
           <input type="hidden" name="lang" value="en" />
           <input type="hidden" name="uriVal" value="${pageContext.request.requestURI}" />

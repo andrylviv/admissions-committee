@@ -50,8 +50,8 @@ public class AuOuFilter implements Filter {
         final Connection conn = (Connection) req.getServletContext().getAttribute("conn");
 
         final HttpSession session = req.getSession();
-        if (!nonNull(session) && !nonNull(session.getAttribute("lang")))
-            req.getSession().setAttribute("lang", "uk");
+        /*if (!nonNull(session) && !nonNull(session.getAttribute("lang")))
+            req.getSession().setAttribute("lang", "uk");*/
 
         if (req.getServletPath().equals("/reg_abiturient.jsp")){
             chain.doFilter(request, response);
@@ -62,7 +62,11 @@ public class AuOuFilter implements Filter {
         }
 
         if (req.getServletPath().equals("/lang_ch")){
+            //res.sendRedirect("lang_ch");
+            logger.trace("before lang_ch");
             req.getRequestDispatcher("lang_ch").forward(request, response);
+            logger.trace("after lang_ch");
+            return;
         }
 
         //Logged user.
@@ -115,6 +119,9 @@ public class AuOuFilter implements Filter {
 
         } else {
             logger.trace("in-1");
+           /* final HttpSession session = req.getSession();
+            if (!nonNull(session) && !nonNull(session.getAttribute("lang")))
+                req.getSession().setAttribute("lang", "uk");*/
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
     }

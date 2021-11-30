@@ -23,7 +23,7 @@ public class Logout extends HttpServlet {
         session.removeAttribute("email");
         session.removeAttribute("isAdmin");
         session.removeAttribute("faculties");
-        //session.removeAttribute("lang");
+        session.removeAttribute("lang");
         //session.invalidate();
         resp.sendRedirect(super.getServletContext().getContextPath());
     }

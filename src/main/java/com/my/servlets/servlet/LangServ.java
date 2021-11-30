@@ -19,16 +19,16 @@ import java.io.IOException;
             resp.sendRedirect(uriVal);
 
         }
-       @Override
+ /*      @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             String lang = req.getParameter("lang");
             String uriVal = req.getParameter("uriVal");
             req.getSession().setAttribute("lang", lang);
             req.getSession().removeAttribute("faculties");
-          /* if(resp.isCommitted()){
+           if(resp.isCommitted()){
                System.out.println("comit");
-           }*/
+           }
             req.getRequestDispatcher(uriVal).forward(req, resp);
 
-        }
+        }*/
 }
