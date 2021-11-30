@@ -36,7 +36,7 @@ public class UserInfoDAO {
             stat.setInt(13,userInfo.getUkHistory());
             stat.setInt(14,userInfo.getPhTraining());
             stat.setInt(15,userInfo.getPhysics());
-            stat.setInt(18,user.getId());
+            stat.setInt(16,user.getId());
 
             stat.executeUpdate();
 

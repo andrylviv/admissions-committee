@@ -1,5 +1,6 @@
 package com.my.servlets.servlet;
 
+import com.my.model.Account;
 import com.my.service.RegAbit;
 
 import javax.servlet.ServletException;
@@ -19,34 +20,34 @@ public class RegAbiturient extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         System.out.println("in_reg_doPost");
+        Account account = new Account();
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String firstName = request.getParameter("first name");
-        String lastName = request.getParameter("last name");
-        String partonymic = request.getParameter("partonymic");
-        String city = request.getParameter("city");
-        String region = request.getParameter("region");
-        String school = request.getParameter("school");
-        int ukLang = Integer.valueOf(request.getParameter("uk lang"));
-        int ukLiter = Integer.valueOf(request.getParameter("uk liter"));
-        int eng = Integer.valueOf(request.getParameter("eng"));
-        int algebra = Integer.valueOf(request.getParameter("algebra"));
-        int informatics = Integer.valueOf(request.getParameter("informatics"));
-        int geometry = Integer.valueOf(request.getParameter("geometry"));
-        int ukHistory = Integer.valueOf(request.getParameter("uk history"));
-        int phTraining = Integer.valueOf(request.getParameter("ph training"));
-        int physics = Integer.valueOf(request.getParameter("physics"));
-        int eieUkLang = Integer.valueOf(request.getParameter("eie uk lang"));
-        int eieMath = Integer.valueOf(request.getParameter("eie math"));
+        account.setEmail(request.getParameter("email"));
+        account.setPassword(request.getParameter("password"));
+        account.setFirstName(request.getParameter("first name"));
+        account.setLastName(request.getParameter("last name"));
+        account.setPartonymic(request.getParameter("partonymic"));
+        account.setCity(request.getParameter("city"));
+        account.setRegion(request.getParameter("region"));
+        account.setSchool(request.getParameter("school"));
+        account.setUkLang(Integer.valueOf(request.getParameter("uk lang")));
+        account.setUkLiter(Integer.valueOf(request.getParameter("uk liter")));
+        account.setEng(Integer.valueOf(request.getParameter("eng")));
+        account.setAlgebra(Integer.valueOf(request.getParameter("algebra")));
+        account.setInformatics(Integer.valueOf(request.getParameter("informatics")));
+        account.setGeometry(Integer.valueOf(request.getParameter("geometry")));
+        account.setUkHistory(Integer.valueOf(request.getParameter("uk history")));
+        account.setPhTraining(Integer.valueOf(request.getParameter("ph training")));
+        account.setPhysics(Integer.valueOf(request.getParameter("physics")));
+       /* int eieUkLang = Integer.valueOf(request.getParameter("eie uk lang"));
+        int eieMath = Integer.valueOf(request.getParameter("eie math"));*/
 
-        RegAbit.regAbit(email, password, firstName, lastName, partonymic, city, region, school, ukLang, ukLiter, eng, algebra,
-                        informatics, geometry, ukHistory, phTraining, physics, eieUkLang, eieMath);
+        RegAbit.regAbit(account);
 
         final HttpSession session = request.getSession();
         session.removeAttribute("email");
         session.removeAttribute("isAdmin");
-        session.setAttribute("abitName", firstName);
+        session.setAttribute("abitName", account.getFirstName());
         response.sendRedirect("reg_abiturient");
     }
 

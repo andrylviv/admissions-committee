@@ -5,38 +5,37 @@ import com.my.db.UserDAO;
 import com.my.db.UserInfoDAO;
 import com.my.db.entity.User;
 import com.my.db.entity.UserInfo;
+import com.my.model.Account;
 
 import java.sql.Connection;
 
 public class RegAbit {
 
 
-    public static void regAbit(String email, String password, String firstName, String lastName, String partonymic,
-                               String city,String region, String school, int ukLang, int ukLiter, int eng, int algebra, int informatics,
-                               int geometry, int ukHistory, int phTraining, int physics, int eieUkLang, int eieMath){
+    public static void regAbit(Account account){
         Connection conn  = DBManager.getConnection();
         User us = new User();
-        us.setEmail(email);
-        us.setPassword(password);
+        us.setEmail(account.getEmail());
+        us.setPassword(account.getPassword());
         us.setIsAdmin(0);
         UserInfo usI = new UserInfo();
-        usI.setFirstName(firstName);
-        usI.setLastName(lastName);
-        usI.setPartonymic(partonymic);
-        usI.setCity(city);
-        usI.setRegion(region);
-        usI.setSchool(school);
-        usI.setUkLang(ukLang);
-        usI.setUkLiter(ukLiter);
-        usI.setEng(eng);
-        usI.setAlgebra(algebra);
-        usI.setInformatics(informatics);
-        usI.setGeometry(geometry);
-        usI.setUkHistory(ukHistory);
-        usI.setPhTraining(phTraining);
-        usI.setPhysics(physics);
-        usI.setEieUkLang(eieUkLang);
-        usI.setEieMath(eieMath);
+        usI.setFirstName(account.getFirstName());
+        usI.setLastName(account.getLastName());
+        usI.setPartonymic(account.getPartonymic());
+        usI.setCity(account.getCity());
+        usI.setRegion(account.getRegion());
+        usI.setSchool(account.getSchool());
+        usI.setUkLang(account.getUkLang());
+        usI.setUkLiter(account.getUkLiter());
+        usI.setEng(account.getEng());
+        usI.setAlgebra(account.getAlgebra());
+        usI.setInformatics(account.getInformatics());
+        usI.setGeometry(account.getGeometry());
+        usI.setUkHistory(account.getUkHistory());
+        usI.setPhTraining(account.getPhTraining());
+        usI.setPhysics(account.getPhysics());
+       /* usI.setEieUkLang(eieUkLang);
+        usI.setEieMath(eieMath);*/
 
         new UserDAO().insertUser(conn,us);
         new UserInfoDAO().insertUserInf(conn,us,usI);
