@@ -1,5 +1,8 @@
 package com.my.servlets.filter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +16,7 @@ import static java.util.Objects.nonNull;
  */
 @WebFilter("/login.jsp")
 public class LoginFilter implements Filter {
-
+    private static final Logger logger = LogManager.getLogger(LoginFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -34,12 +37,12 @@ public class LoginFilter implements Filter {
             final int isAdmin = (int) session.getAttribute("isAdmin");
 
             if (isAdmin==0) {
-                System.out.println(isAdmin+"inabf");
+                logger.trace(isAdmin+"inLogf");
 
                 req.getRequestDispatcher("abiturient_menu.jsp").forward(request, response);
             }
             if (isAdmin==1) {
-                System.out.println(isAdmin+"inabf");
+                logger.trace(isAdmin+"inLogf");
 
                 req.getRequestDispatcher("admin_menu.jsp").forward(request, response);
             }
