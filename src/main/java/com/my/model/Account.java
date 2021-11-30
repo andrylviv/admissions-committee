@@ -1,5 +1,7 @@
 package com.my.model;
 
+import javax.validation.constraints.*;
+
 public class Account {
     private String email;
     private String password;
@@ -19,6 +21,8 @@ public class Account {
     private int phTraining;
     private int physics;
 
+    @NotEmpty
+    @Email
     public String getEmail() {
         return email;
     }
@@ -35,6 +39,8 @@ public class Account {
         this.password = password;
     }
 
+    @NotEmpty
+    @Pattern(regexp = "\\b[A-ZА-ЯЇІЄ][a-zа-яїіє]+\\b")
     public String getFirstName() {
         return firstName;
     }
@@ -43,6 +49,8 @@ public class Account {
         this.firstName = firstName;
     }
 
+    @NotEmpty
+    @Pattern(regexp = "\\b[A-ZА-ЯЇІЄ][a-zа-яїіє]+\\b")
     public String getLastName() {
         return lastName;
     }
@@ -51,6 +59,8 @@ public class Account {
         this.lastName = lastName;
     }
 
+    @NotEmpty
+    @Pattern(regexp = "\\b[A-ZА-ЯЇІЄ][a-zа-яїіє]+\\b")
     public String getPartonymic() {
         return partonymic;
     }
@@ -83,6 +93,9 @@ public class Account {
         this.school = school;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getUkLang() {
         return ukLang;
     }
@@ -91,6 +104,9 @@ public class Account {
         this.ukLang = ukLang;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getUkLiter() {
         return ukLiter;
     }
@@ -99,6 +115,9 @@ public class Account {
         this.ukLiter = ukLiter;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getEng() {
         return eng;
     }
@@ -107,6 +126,9 @@ public class Account {
         this.eng = eng;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getAlgebra() {
         return algebra;
     }
@@ -115,6 +137,9 @@ public class Account {
         this.algebra = algebra;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getInformatics() {
         return informatics;
     }
@@ -123,6 +148,9 @@ public class Account {
         this.informatics = informatics;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getGeometry() {
         return geometry;
     }
@@ -131,6 +159,9 @@ public class Account {
         this.geometry = geometry;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getUkHistory() {
         return ukHistory;
     }
@@ -139,6 +170,9 @@ public class Account {
         this.ukHistory = ukHistory;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getPhTraining() {
         return phTraining;
     }
@@ -147,6 +181,9 @@ public class Account {
         this.phTraining = phTraining;
     }
 
+    @NotNull
+    @Min(0)
+    @Max(12)
     public int getPhysics() {
         return physics;
     }

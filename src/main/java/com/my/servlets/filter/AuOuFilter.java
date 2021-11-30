@@ -59,6 +59,7 @@ public class AuOuFilter implements Filter {
 
         if (req.getServletPath().equals("/reg_abiturient")){
             req.getRequestDispatcher("reg_abiturient").forward(request, response);
+            return;
         }
 
         if (req.getServletPath().equals("/lang_ch")){
