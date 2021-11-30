@@ -28,21 +28,21 @@
 
 <div align="right">
     <form method="post" action="<c:url value='/list' ></c:url>">
-        <label for="lang">Language:</label>
+<%--    <label for="lang">Language:</label>   --%>
         <select name="lang" id="lang">
-            <option value="uk">ukrainian</option>
-            <option value="en">english</option>
+            <option value="uk"><fmt:message key = "label.uk" bundle = "${lang}"/></option>
+            <option value="en"><fmt:message key = "label.en" bundle = "${lang}"/></option>
         </select>
         <input type="hidden" id="uriVal" name="uriVal" value="list">
         <input type="hidden" id="command" name="command" value="langchange">
         <input type="submit" value="Submit">
     </form>
     <form method="post" action="<c:url value='/list' ></c:url>">
-        <label for="sortType">Sort:</label>
+<%--    <label for="sortType">Sort:</label>  --%>
         <select name="sortType" id="sortType">
-            <option value="byName">by name</option>
-            <option value="fp">founded places</option>
-            <option value="tp">total places</option>
+            <option value="byName"><fmt:message key = "label.byName" bundle = "${lang}"/></option>
+            <option value="fp"><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></option>
+            <option value="tp"><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></option>
         </select>
         <input type="hidden" id="uriVal1" name="uriVal" value="list">
         <input type="hidden" id="command1" name="command" value="sort">
@@ -55,36 +55,36 @@
     <a href="<c:url value='/logout' />"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </div>
 
-<hr>
-<div align="right">
-                <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-                <c:if test="${ not empty user and user eq '1' }">
-                    <a href="<c:url value='edit_faculty.jsp' >
-                                <c:param name="command" value="add"/>
-                             </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/>
-                    </a><br>
-                    <form action="statement" method="POST">
-                        <input type="hidden" name="command" value="fin" />
-                        <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.finalise" bundle = "${lang}"/></a>
-                    </form>
-                </c:if>
-</div>
+    <hr>
+    <div align="right">
+                    <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                    <c:if test="${ not empty user and user eq '1' }">
+                        <a href="<c:url value='edit_faculty.jsp' >
+                                    <c:param name="command" value="add"/>
+                                 </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/>
+                        </a><br>
+                        <form action="statement" method="POST">
+                            <input type="hidden" name="command" value="fin" />
+                            <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.finalise" bundle = "${lang}"/></a>
+                        </form>
+                    </c:if>
+    </div>
 
-<table>
-    <tr>
-        <th>Faculty</th>
-        <th>St. fou. places</th>
-        <th>Total places</th>
-    </tr>
-    <c:forEach var="faculties" items="${sessionScope.faculties}" varStatus="status">
+    <table>
         <tr>
+            <th><fmt:message key = "label.faculty" bundle = "${lang}"/></th>
+            <th><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></th>
+            <th><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></th>
+        </tr>
+        <c:forEach var="faculties" items="${sessionScope.faculties}" varStatus="status">
+            <tr>
 
-            <td><c:out value="${ faculties.name }" /></td>
-            <td><c:out value="${ faculties.stFundedPlaces }" /></td>
-            <td><c:out value="${ faculties.totPlaces }" /></td>
-                <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-                <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
-                <c:if test="${ not empty user and user eq '0' and block eq '0' }">           <%--if user abiturient--%>
+                <td><c:out value="${ faculties.name }" /></td>
+                <td><c:out value="${ faculties.stFundedPlaces }" /></td>
+                <td><c:out value="${ faculties.totPlaces }" /></td>
+                    <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                    <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
+                    <c:if test="${ not empty user and user eq '0' and block eq '0' }">           <%--if user abiturient--%>
                     <c:set var="fl" value="0" scope="page"/>
                     <c:forEach var="usfaculty" items="${sessionScope.usfaculty}" varStatus="status">
                         <c:set var="fidList" value="${faculties.id}" scope="page"/>
