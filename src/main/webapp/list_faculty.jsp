@@ -126,6 +126,11 @@
                      <td><a href="<c:url value='edit_faculty.jsp' >
                                      <c:param name="id" value="${faculties.id}"/>
                                      <c:param name="name" value="${faculties.name}"/>
+                                     <c:param name="stFundedPlaces" value="${faculties.stFundedPlaces}"/>
+                                     <c:param name="totPlaces" value="${faculties.totPlaces}"/>
+                                     <c:param name="eieUkLang" value="${faculties.isEieUkLang}"/>
+                                     <c:param name="eieMath" value="${faculties.isEieMath}"/>
+                                     <c:param name="eiePhysics" value="${faculties.isEiePhysics}"/>
                                      <c:param name="command" value="edit"/>
                                   </c:url>" class="btn btn-info" role="button">edit faculty</a>
                      </td>

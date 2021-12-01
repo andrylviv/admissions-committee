@@ -33,20 +33,44 @@
 </div>
     <form action="<c:url value='/update_fty' ></c:url>">
         <label for="fname">new faculty name:</label>
-        <input type="text" id="nfname" name="fname" required><br><br>
+        <input type="text" id="nfname" name="fname" required value="${param.name}"><br><br>
         <label for="stfpl">new st. fon places:</label>
-        <input type="number" id="nstfpl" name="stfpl" min="0" required><br><br>
+        <input type="number" id="nstfpl" name="stfpl" min="0" required value="${param.stFundedPlaces}"><br><br>
         <label for="totpl">new total places:</label>
-        <input type="number" id="ntotpl" name="totpl" min="0" required><br><br>
+        <input type="number" id="ntotpl" name="totpl" min="0" required value="${param.totPlaces}"><br><br>
         <input type="hidden" id="nlang" name="lang" value="${sessionScope.lang}">
         <input type="hidden" id="nfacultyId" name="facultyId" value="${param.id}">
         <input type="hidden" id="ncommand" name="command" value="edit">
+        <c:set var="eieUkLang" value="${param.eieUkLang}" scope="page"/>
+        <c:if test="${ not empty eieUkLang and eieUkLang eq 1 }">
+            <input type="checkbox" id="nukLang" name="ukLang" value="1" checked>
+            <label for="nukLang"> eie uk lang</label><br>
+        </c:if>
+        <c:set var="eieUkLang" value="${param.eieUkLang}" scope="page"/>
+        <c:if test="${ not empty eieUkLang and eieUkLang eq 0 }">
             <input type="checkbox" id="nukLang" name="ukLang" value="1">
             <label for="nukLang"> eie uk lang</label><br>
+        </c:if>
+        <c:set var="eieMath" value="${param.eieMath}" scope="page"/>
+        <c:if test="${ not empty eieMath and eieMath eq 1 }">
+            <input type="checkbox" id="nmath" name="math" value="1" checked>
+            <label for="nmath"> eie math</label><br>
+        </c:if>
+        <c:set var="eieMath" value="${param.eieMath}" scope="page"/>
+        <c:if test="${ not empty eieMath and eieMath eq 0 }">
             <input type="checkbox" id="nmath" name="math" value="1">
             <label for="nmath"> eie math</label><br>
+        </c:if>
+        <c:set var="eiePhysics" value="${param.eiePhysics}" scope="page"/>
+        <c:if test="${ not empty eiePhysics and eiePhysics eq 1 }">
+            <input type="checkbox" id="nphysics" name="physics" value="1" checked>
+            <label for="nphysics"> eie physics</label><br><br>
+        </c:if>
+        <c:set var="eiePhysics" value="${param.eiePhysics}" scope="page"/>
+        <c:if test="${ not empty eiePhysics and eiePhysics eq 0 }">
             <input type="checkbox" id="nphysics" name="physics" value="1">
             <label for="nphysics"> eie physics</label><br><br>
+        </c:if>
         <input type="submit" class="btn btn-success" value="Submit">
     </form>
     <c:set var="wrongCr" value="${param.wrongCr}" scope="page"/>
