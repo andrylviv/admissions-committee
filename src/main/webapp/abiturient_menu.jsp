@@ -26,7 +26,7 @@
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "pagecontent" var = "lang"/>
 
-<h2>Hello APPLICANT ${sessionScope.name}!</h2>
+<h2><fmt:message key = "label.helloAp" bundle = "${lang}"/> ${sessionScope.name}!</h2>
 <a href="<c:url value="/list"/>"><fmt:message key = "label.facultyList" bundle = "${lang}"/></a>
 <a href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
 </body>

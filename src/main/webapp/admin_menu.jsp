@@ -27,7 +27,7 @@
     <jsp:include page="langChange.jsp" />
 
 </div>
-<h2>Hello ADMIN!</h2>
+<h2><fmt:message key = "label.helloAdm" bundle = "${lang}"/></h2>
 <a href="<c:url value='/list_user'>
              <c:param name="command" value="lou"/>
          </c:url>"><fmt:message key = "label.listOfApplicants" bundle = "${lang}"/></a>
