@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    public static List<UserInfo> getUsersInfo(){
+    public static List<UserInfo> getUsersInfo(int p){
         final Connection conn = DBManager.getConnection();
-        List<UserInfo> ul = new UserInfoDAO().getUsersInf(conn);
+        List<UserInfo> ul = new UserInfoDAO().getUsersInfPag(conn,p);
         try {
             conn.close();
         } catch (SQLException e) {

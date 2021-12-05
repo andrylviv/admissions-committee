@@ -19,119 +19,143 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         h5 {color:red;}
+        h5 {margin: 6px;}
     </style>
 </head>
 <body>
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "pagecontent" var = "lang"/>
-<div align="right">
-<c:set var="block" value="${user.isBlocked}" scope="page"/>
-<c:if test="${ block eq '1' }">
-    <h5>blocked</h5>
-</c:if>
+<div class="page-header" style="margin-bottom:0">
+    <h2>admissions committee</h2>
 
-    <c:set var="block" value="${user.isBlocked}" scope="page"/>
-    <c:if test="${ not empty block and block eq '0' and block eq '0' }">
-        <td><a href="<c:url value='list_user' >
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+        </ul>
+    </div>
+    <div align="right">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <c:set var="block" value="${user.isBlocked}" scope="page"/>
+                <c:if test="${ block eq '1' }">
+                    <h5>blocked</h5>
+                </c:if>
+            </li>
+
+            <li class="nav-item">
+
+                <c:set var="block" value="${user.isBlocked}" scope="page"/>
+                <c:if test="${ not empty block and block eq '0' and block eq '0' }">
+                    <td><a class="nav-link" href="<c:url value='list_user' >
                                     <c:param name="id" value="${user.id}"/>
                                     <c:param name="bf" value="1"/>
                                     <c:param name="command" value="block"/>
                              </c:url>">block</a>
-        </td>
-    </c:if>
+                    </td>
+                </c:if>
 
-    <c:set var="block" value="${user.isBlocked}" scope="page"/>
-    <c:if test="${ not empty block and block eq '1' }">
-        <td><a href="<c:url value='list_user' >
+                <c:set var="block" value="${user.isBlocked}" scope="page"/>
+                <c:if test="${ not empty block and block eq '1' }">
+                    <td><a class="nav-link" href="<c:url value='list_user' >
                                     <c:param name="id" value="${user.id}"/>
                                     <c:param name="bf" value="0"/>
                                     <c:param name="command" value="block"/>
                                  </c:url>">unblock</a>
-        </td>
-    </c:if>
-    <br>
-    <a href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+                    </td>
+                </c:if>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div  class="container">
+
+    <table>
+
+        <tr>
+            <td>id:</td>
+            <td><c:out value="${ user.id }" /></td>
+        </tr>
+        <tr>
+            <td>email:</td>
+            <td><c:out value="${ user.email }" /></td>
+        </tr>
+        <tr>
+            <td>firstName:</td>
+            <td><c:out value="${ uInfo.firstName }" /></td>
+        </tr>
+        <tr>
+            <td>partonymic:</td>
+            <td><c:out value="${ uInfo.partonymic }" /></td>
+        </tr>
+        <tr>
+            <td>city:</td>
+            <td><c:out value="${ uInfo.city }" /></td>
+        </tr>
+        <tr>
+            <td>region:</td>
+            <td><c:out value="${ uInfo.region }" /></td>
+        </tr>
+        <tr>
+            <td>school:</td>
+            <td><c:out value="${ uInfo.school }" /></td>
+        </tr>
+        <tr>
+            <td>ukLang:</td>
+            <td><c:out value="${ uInfo.ukLang }" /></td>
+        </tr>
+        <tr>
+            <td>ukLiter:</td>
+            <td><c:out value="${ uInfo.ukLiter }" /></td>
+        </tr>
+        <tr>
+            <td>eng:</td>
+            <td><c:out value="${ uInfo.eng }" /></td>
+        </tr>
+        <tr>
+            <td>algebra:</td>
+            <td><c:out value="${ uInfo.algebra }" /></td>
+        </tr>
+        <tr>
+            <td>informatics:</td>
+            <td><c:out value="${ uInfo.informatics }" /></td>
+        </tr>
+        <tr>
+            <td>geometry:</td>
+            <td><c:out value="${ uInfo.geometry }" /></td>
+        </tr>
+        <tr>
+            <td>ukHistory:</td>
+            <td><c:out value="${ uInfo.ukHistory }" /></td>
+        </tr>
+        <tr>
+            <td>phTraining:</td>
+            <td><c:out value="${ uInfo.phTraining }" /></td>
+        </tr>
+        <tr>
+            <td>physics:</td>
+            <td><c:out value="${ uInfo.physics }" /></td>
+        </tr>
+        <tr>
+            <td>eieUkLang:</td>
+            <td><c:out value="${ uInfo.eieUkLang }" /></td>
+        </tr>
+        <tr>
+            <td>eieMath:</td>
+            <td><c:out value="${ uInfo.eieMath }" /></td>
+        </tr>
+        <tr>
+            <td>eiePhysics:</td>
+            <td><c:out value="${ uInfo.eiePhysics }" /></td>
+        </tr>
+
+    </table>
 </div>
-<hr>
-<table>
-
-    <tr>
-        <td>id:</td>
-        <td><c:out value="${ user.id }" /></td>
-    </tr>
-    <tr>
-        <td>email:</td>
-        <td><c:out value="${ user.email }" /></td>
-    </tr>
-    <tr>
-        <td>firstName:</td>
-        <td><c:out value="${ uInfo.firstName }" /></td>
-    </tr>
-    <tr>
-        <td>partonymic:</td>
-        <td><c:out value="${ uInfo.partonymic }" /></td>
-    </tr>
-    <tr>
-        <td>city:</td>
-        <td><c:out value="${ uInfo.city }" /></td>
-    </tr>
-    <tr>
-        <td>region:</td>
-        <td><c:out value="${ uInfo.region }" /></td>
-    </tr>
-    <tr>
-        <td>school:</td>
-        <td><c:out value="${ uInfo.school }" /></td>
-    </tr>
-    <tr>
-        <td>ukLang:</td>
-        <td><c:out value="${ uInfo.ukLang }" /></td>
-    </tr>
-    <tr>
-        <td>ukLiter:</td>
-        <td><c:out value="${ uInfo.ukLiter }" /></td>
-    </tr>
-    <tr>
-        <td>eng:</td>
-        <td><c:out value="${ uInfo.eng }" /></td>
-    </tr>
-    <tr>
-        <td>algebra:</td>
-        <td><c:out value="${ uInfo.algebra }" /></td>
-    </tr>
-    <tr>
-        <td>informatics:</td>
-        <td><c:out value="${ uInfo.informatics }" /></td>
-    </tr>
-    <tr>
-        <td>geometry:</td>
-        <td><c:out value="${ uInfo.geometry }" /></td>
-    </tr>
-    <tr>
-        <td>ukHistory:</td>
-        <td><c:out value="${ uInfo.ukHistory }" /></td>
-    </tr>
-    <tr>
-        <td>phTraining:</td>
-        <td><c:out value="${ uInfo.phTraining }" /></td>
-    </tr>
-    <tr>
-        <td>physics:</td>
-        <td><c:out value="${ uInfo.physics }" /></td>
-    </tr>
-    <tr>
-        <td>eieUkLang:</td>
-        <td><c:out value="${ uInfo.eieUkLang }" /></td>
-    </tr>
-    <tr>
-        <td>eieMath:</td>
-        <td><c:out value="${ uInfo.eieMath }" /></td>
-    </tr>
-    <tr>
-        <td>eiePhysics:</td>
-        <td><c:out value="${ uInfo.eiePhysics }" /></td>
-    </tr>
-
-</table>
 </body>
 </html>

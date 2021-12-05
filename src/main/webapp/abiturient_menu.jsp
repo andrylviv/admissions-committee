@@ -17,17 +17,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        form {margin: 1px;}
+    </style>
 </head>
 <body>
-<div align="right">
-    <jsp:include page="langChange.jsp" />
 
-</div>
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "pagecontent" var = "lang"/>
+<div class="page-header" style="margin-bottom:0">
+    <h2>admissions committee</h2>
 
-<h2><fmt:message key = "label.helloAp" bundle = "${lang}"/> ${sessionScope.name}!</h2>
-<a href="<c:url value="/list"/>"><fmt:message key = "label.facultyList" bundle = "${lang}"/></a>
-<a href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/list"/>"><fmt:message key = "label.facultyList" bundle = "${lang}"/></a>
+            </li>
+
+        </ul>
+    </div>
+    <div align="right">
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <jsp:include page="langChange.jsp" />
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h3><fmt:message key = "label.helloAp" bundle = "${lang}"/> ${sessionScope.name}!</h3>
+
 </body>
 </html>

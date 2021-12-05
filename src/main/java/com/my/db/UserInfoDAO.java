@@ -17,6 +17,7 @@ public class UserInfoDAO {
     public static final String INSERT_EIE_UK_LANG = "UPDATE user_info SET eie_uk_lang = ? WHERE user_id = ?";
     public static final String INSERT_EIE_MATH = "UPDATE user_info SET eie_math = ? WHERE user_id = ?";
     public static final String INSERT_EIE_PHYSICS = "UPDATE user_info SET eie_physics = ? WHERE user_id = ?";
+    public static final String GET_USER_INFO_LIST_PAGE = "SELECT * FROM user_info LIMIT ?,?";
 
     public void  insertUserInf(Connection conn,User user, UserInfo userInfo){
         try(PreparedStatement stat = conn.prepareStatement(INSERT_USER_INFO)) {
@@ -44,7 +45,29 @@ public class UserInfoDAO {
             e.printStackTrace();
         }
     }
+    public List<UserInfo> getUsersInfPag(Connection conn,int page){
 
+        List<UserInfo> userList = new ArrayList<>();
+
+        try(PreparedStatement stat = conn.prepareStatement(GET_USER_INFO_LIST_PAGE)) {
+
+            stat.setInt(1,page*3-3);
+            stat.setInt(2,3);
+            try(ResultSet resultSet = stat.executeQuery()) {
+                while (resultSet.next()) {
+                    UserInfo userInfo = new UserInfo();
+                    userInfo.setFirstName(resultSet.getString(2));
+                    userInfo.setLastName(resultSet.getString(3));
+                    userInfo.setPartonymic(resultSet.getString(4));
+                    userInfo.setUserId(resultSet.getInt(20));
+                    userList.add(userInfo);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
     public List<UserInfo> getUsersInf(Connection conn){
 
         List<UserInfo> userList = new ArrayList<>();

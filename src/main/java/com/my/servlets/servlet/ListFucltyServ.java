@@ -47,7 +47,7 @@ public class ListFucltyServ extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        logger.debug("");
+        logger.debug("page "+ req.getSession().getAttribute("page"));
         resp.setContentType("text/html; charset=UTF-8");
         String language = (String) req.getSession().getAttribute("lang");
         if (!nonNull(language)){
@@ -57,6 +57,8 @@ public class ListFucltyServ extends HttpServlet {
         List<Faculty> faculties = (List<Faculty>)req.getSession().getAttribute("faculties");
         if (!nonNull(faculties)) {
             faculties = FacultyList.getFacultyList(language);
+            FacultyList.sortFaculty(faculties,"byName");
+            req.getSession().setAttribute("sortType", "byName");
             req.getSession().setAttribute("faculties", faculties);
         }
 

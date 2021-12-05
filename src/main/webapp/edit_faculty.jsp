@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>Edit faculty</title>
@@ -21,9 +22,37 @@
     </style>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "pagecontent" var = "lang"/>
+<div class="page-header" style="margin-bottom:0">
+    <h2>admissions committee</h2>
+
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+
+        </ul>
+    </div>
+    <div align="right">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="list"><fmt:message key = "label.back" bundle = "${lang}"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+            </li>
+            <li class="nav-item">
+
+            </li>
+        </ul>
+    </div>
+</nav>
 <c:set var="command" value="${param.command}" scope="page"/>
 <c:if test="${ not empty command and command eq 'edit' }">
-    <h2>Edit faculty ${param.name}</h2>
+    <h5>Edit faculty ${param.name}</h5>
 <div align="right">
     <form action="<c:url value='/update_fty' ></c:url>">
         <input type="hidden" id="facultyId1" name="facultyId" value="${param.id}">

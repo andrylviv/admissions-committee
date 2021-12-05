@@ -48,11 +48,19 @@ public class StatementServ extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (nonNull(req.getSession().getAttribute("com")) && req.getSession().getAttribute("com").equals("ats")) {
             resp.setContentType("text/html; charset=UTF-8");
-            resp.getWriter().println(req.getSession().getAttribute("faName") + " added");
+            req.getSession().removeAttribute("com");
+            req.setAttribute("mass", req.getSession().getAttribute("faName") + " added");
+            req.getRequestDispatcher("success.jsp").forward(req,resp);
+            return;
+            //resp.getWriter().println(req.getSession().getAttribute("faName") + " added");
         }
         if (nonNull(req.getSession().getAttribute("com")) && req.getSession().getAttribute("com").equals("fin")) {
             resp.setContentType("text/html; charset=UTF-8");
-            resp.getWriter().println("finalised");
+            req.getSession().removeAttribute("com");
+            req.setAttribute("mass", "finalized");
+            req.getRequestDispatcher("success.jsp").forward(req,resp);
+            return;
+            //resp.getWriter().println("finalised");
         }
         if (nonNull(req.getParameter("com")) && req.getParameter("com").equals("getList")) {
             List<UserInfo> userInfoList = StatementManager.getFacultyApplicantList(Integer.valueOf(req.getParameter("id")));

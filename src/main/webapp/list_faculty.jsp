@@ -19,72 +19,97 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         h5 {color:red;}
-        form {margin: 1px;}
+        form {margin:0px;}
     </style>
 </head>
 <body>
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "pagecontent" var = "lang"/>
+<div class="page-header" style="margin-bottom:0">
+    <h2>admissions committee</h2>
+
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+            <c:if test="${ not empty user and user eq '1' }">
+                <a class="nav-link" href="<c:url value='edit_faculty.jsp' >
+                                        <c:param name="command" value="add"/>
+                                     </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/>
+                </a>
+                <form action="statement" method="POST">
+                    <input type="hidden" name="command" value="fin" />
+                    <a class="nav-link" href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.finalise" bundle = "${lang}"/></a>
+                </form>
+            </c:if>
+
+        </ul>
+    </div>
+    <div align="right">
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+
+                <form method="post" action="<c:url value='/list' ></c:url>">
+                    <%--    <label for="lang">Language:</label>   --%>
+                    <select name="lang" id="lang">
+                        <option value="uk"><fmt:message key = "label.uk" bundle = "${lang}"/></option>
+                        <option value="en"><fmt:message key = "label.en" bundle = "${lang}"/></option>
+                    </select>
+                    <input type="hidden" id="uriVal" name="uriVal" value="list">
+                    <input type="hidden" id="command" name="command" value="langchange">
+                    <input type="submit" value="Submit">
+                </form>
+            </li>
+            <li class="nav-item">
+                <form method="post" action="<c:url value='/list' ></c:url>">
+                    <%--    <label for="sortType">Sort:</label>  --%>
+                    <select name="sortType" id="sortType">
+                        <option value="byName"><fmt:message key = "label.byName" bundle = "${lang}"/></option>
+                        <option value="fp"><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></option>
+                        <option value="tp"><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></option>
+                    </select>
+                    <input type="hidden" id="uriVal1" name="uriVal" value="list">
+                    <input type="hidden" id="command1" name="command" value="sort">
+                    <input type="submit" value="Submit">
+                </form>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<c:url value="/logout"/>"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <div align="right">
-    <form method="post" action="<c:url value='/list' ></c:url>">
-<%--    <label for="lang">Language:</label>   --%>
-        <select name="lang" id="lang">
-            <option value="uk"><fmt:message key = "label.uk" bundle = "${lang}"/></option>
-            <option value="en"><fmt:message key = "label.en" bundle = "${lang}"/></option>
-        </select>
-        <input type="hidden" id="uriVal" name="uriVal" value="list">
-        <input type="hidden" id="command" name="command" value="langchange">
-        <input type="submit" value="Submit">
-    </form>
-    <form method="post" action="<c:url value='/list' ></c:url>">
-<%--    <label for="sortType">Sort:</label>  --%>
-        <select name="sortType" id="sortType">
-            <option value="byName"><fmt:message key = "label.byName" bundle = "${lang}"/></option>
-            <option value="fp"><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></option>
-            <option value="tp"><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></option>
-        </select>
-        <input type="hidden" id="uriVal1" name="uriVal" value="list">
-        <input type="hidden" id="command1" name="command" value="sort">
-        <input type="submit" value="Submit">
-    </form>
+
+
     <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
     <c:if test="${ block eq '1' }">
         <h5>blocked</h5>
     </c:if>
-    <a href="<c:url value='/logout' />"><fmt:message key = "label.logout" bundle = "${lang}"/></a>
+    <%--    <a href="<c:url value='/logout' />"><fmt:message key = "label.logout" bundle = "${lang}"/></a> --%>
 </div>
 
-    <hr>
-    <div align="right">
-                    <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-                    <c:if test="${ not empty user and user eq '1' }">
-                        <a href="<c:url value='edit_faculty.jsp' >
-                                    <c:param name="command" value="add"/>
-                                 </c:url>"><fmt:message key = "label.add" bundle = "${lang}"/>
-                        </a><br>
-                        <form action="statement" method="POST">
-                            <input type="hidden" name="command" value="fin" />
-                            <a href="#" onclick="this.parentNode.submit()"><fmt:message key = "label.finalise" bundle = "${lang}"/></a>
-                        </form>
-                    </c:if>
-    </div>
-
-    <table>
-        <tr>
-            <th><fmt:message key = "label.faculty" bundle = "${lang}"/></th>
-            <th><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></th>
-            <th><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></th>
-        </tr>
-        <c:forEach var="faculties" items="${sessionScope.faculties}" varStatus="status">
+        <div class="container-fluid">
+        <table>
             <tr>
+                <th><fmt:message key = "label.faculty" bundle = "${lang}"/></th>
+                <th><fmt:message key = "label.stFouPlaces" bundle = "${lang}"/></th>
+                <th><fmt:message key = "label.totalPlaces" bundle = "${lang}"/></th>
+            </tr>
+            <c:forEach var="faculties" items="${sessionScope.faculties}" varStatus="status">
+                <tr>
 
-                <td><c:out value="${ faculties.name }" /></td>
-                <td><c:out value="${ faculties.stFundedPlaces }" /></td>
-                <td><c:out value="${ faculties.totPlaces }" /></td>
-                    <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
-                    <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
-                    <c:if test="${ not empty user and user eq '0' and block eq '0' }">           <%--if user abiturient--%>
+                    <td><c:out value="${ faculties.name }" /></td>
+                    <td><c:out value="${ faculties.stFundedPlaces }" /></td>
+                    <td><c:out value="${ faculties.totPlaces }" /></td>
+                        <c:set var="user" value="${sessionScope.isAdmin}" scope="page"/>
+                        <c:set var="block" value="${sessionScope.isBlocked}" scope="page"/>
+                        <c:if test="${ not empty user and user eq '0' and block eq '0' }">           <%--if user abiturient--%>
                     <c:set var="fl" value="0" scope="page"/>
                     <c:forEach var="usfaculty" items="${sessionScope.usfaculty}" varStatus="status">
                         <c:set var="fidList" value="${faculties.id}" scope="page"/>
@@ -172,8 +197,9 @@
                      </td>
                 </c:if>
 
-        </tr>
-    </c:forEach>
-</table>
+                 </tr>
+            </c:forEach>
+        </table>
+        </div>
 </body>
 </html>

@@ -24,7 +24,7 @@
       <form action="lang_ch" method="POST">
           <input type="hidden" name="lang" value="en" />
           <input type="hidden" name="uriVal" value="${pageContext.request.requestURI}" />
-          <a href="#" onclick="this.parentNode.submit()">en</a>
+          <a class="nav-link" href="#" onclick="this.parentNode.submit()">en</a>
       </form>
   </c:if>
 
@@ -33,7 +33,7 @@
       <form action="lang_ch" method="POST">
           <input type="hidden" name="lang" value="uk" />
           <input type="hidden" name="uriVal" value="${pageContext.request.requestURI}" />
-          <a href="#" onclick="this.parentNode.submit()">uk</a>
+          <a class="nav-link" href="#" onclick="this.parentNode.submit()">uk</a>
       </form>
   </c:if>
 </div>
