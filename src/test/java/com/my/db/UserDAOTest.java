@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
 public class UserDAOTest {
     private static final String JDBC_DRIVER = "org.h2.Driver";
     private static final String DB_URL = "jdbc:h2:~/test";
-    private static final String URL_CONNECTION = "jdbc:h2:~/test;user=root;password=1991;";
     private static final String USER = "root";
     private static final String PASS = "1991";
 
