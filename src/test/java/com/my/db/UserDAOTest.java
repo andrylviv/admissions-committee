@@ -106,4 +106,86 @@ public class UserDAOTest {
                     &&((Integer)user.getIsBlocked()).equals(us.getIsBlocked()));
         }
     }
+
+    @Test
+    public void testGetUserById() throws SQLException {
+        User user = new User();
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stat = connection.prepareStatement("INSERT INTO user(email,is_admin,password,is_blocked) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)){
+            user.setEmail("exem@mail.com");
+            user.setIsAdmin(0);
+            user.setPassword("1111");
+            user.setIsBlocked(0);
+            stat.setString(1, user.getEmail());
+            stat.setString(2, String.valueOf(user.getIsAdmin()));
+            stat.setString(3, user.getPassword());
+            stat.setInt(4, 0);
+            stat.executeUpdate();
+            try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    user.setId(generatedKeys.getInt(1));
+                }
+            }
+            User us = new UserDAO().getUserById(connection,user.getId());
+            assertTrue(user.getEmail().equals(us.getEmail()) && ((Integer) user.getIsAdmin()).equals(us.getIsAdmin())
+                    &&((Integer)user.getIsAdmin()).equals(us.getIsAdmin())//&&user.getPassword().equals(us.getPassword())
+                    &&((Integer)user.getIsBlocked()).equals(us.getIsBlocked()));
+        }
+    }
+
+    @Test
+    public void testIfUserExist() throws SQLException {
+        User user = new User();
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stat = connection.prepareStatement("INSERT INTO user(email,is_admin,password,is_blocked) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)){
+            user.setEmail("exem@mail.com");
+            user.setIsAdmin(0);
+            user.setPassword("1111");
+            user.setIsBlocked(0);
+            stat.setString(1, user.getEmail());
+            stat.setString(2, String.valueOf(user.getIsAdmin()));
+            stat.setString(3, user.getPassword());
+            stat.setInt(4, 0);
+            stat.executeUpdate();
+            try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    user.setId(generatedKeys.getInt(1));
+                }
+            }
+            boolean ifUserExist = new UserDAO().ifUserExist(connection,user.getEmail(),user.getPassword());
+            assertTrue(ifUserExist);
+        }
+    }
+
+    @Test
+    public void testSetBlockFlag() throws SQLException {
+        User user = new User();
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stat = connection.prepareStatement("INSERT INTO user(email,is_admin,password,is_blocked) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)){
+            user.setEmail("exem@mail.com");
+            user.setIsAdmin(0);
+            user.setPassword("1111");
+            user.setIsBlocked(0);
+            stat.setString(1, user.getEmail());
+            stat.setString(2, String.valueOf(user.getIsAdmin()));
+            stat.setString(3, user.getPassword());
+            stat.setInt(4, 0);
+            stat.executeUpdate();
+            try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    user.setId(generatedKeys.getInt(1));
+                }
+            }
+            new UserDAO().setBlockFlag(connection,user.getId(),1);
+            int isBlocked = 0;
+                PreparedStatement stat1 = connection.prepareStatement("SELECT is_blocked FROM user WHERE id=?");
+                stat1.setInt(1, user.getId());
+                try (ResultSet resultSet = stat1.executeQuery()) {
+                    while (resultSet.next()) {
+                        isBlocked = resultSet.getInt(1);
+                    }
+                }
+            assertTrue(isBlocked==1);
+        }
+    }
 }
