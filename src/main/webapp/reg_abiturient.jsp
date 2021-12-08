@@ -47,72 +47,72 @@ ${errors }
     <form action="reg_abiturient" method="POST">
         <table>
             <tr>
-                <td>email:</td>
+                <td><fmt:message key = "label.email" bundle = "${lang}"/></td>
                 <td><input type="email" required name="email" value="${account.email }"/></td>
             </tr>
             <tr>
-                <td>password:</td>
+                <td><fmt:message key = "label.password" bundle = "${lang}"/></td>
                 <td><input type="password" required name="password" value="${account.password }"/></td>
             </tr>
 
             <tr>
-                <td>first name:</td>
+                <td><fmt:message key = "label.firstName" bundle = "${lang}"/></td>
                 <td><input type="text" required name="first name" value="${account.firstName }"/></td>
             </tr>
             <tr>
-                <td>last name:</td>
+                <td><fmt:message key = "label.lastName" bundle = "${lang}"/></td>
                 <td><input type="text" required name="last name" value="${account.lastName }"/></td>
             </tr>
             <tr>
-                <td>partonymic:</td>
+                <td><fmt:message key = "label.partonymic" bundle = "${lang}"/></td>
                 <td><input type="text" required name="partonymic" value="${account.partonymic }"/></td>
             </tr>
             <tr>
-                <td>city:</td>
+                <td><fmt:message key = "label.city" bundle = "${lang}"/></td>
                 <td><input type="text" required name="city" value="${account.city }"/></td>
             </tr>
             <tr>
-                <td>region:</td>
+                <td><fmt:message key = "label.region" bundle = "${lang}"/></td>
                 <td><input type="text" required name="region" value="${account.region }"/></td>
             </tr>
             <tr>
-                <td>school:</td>
+                <td><fmt:message key = "label.school" bundle = "${lang}"/></td>
                 <td><input type="text" required name="school" value="${account.school }"/></td>
             </tr>
             <tr>
-                <td>uk lang:</td>
+                <td><fmt:message key = "label.ukLang" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="uk lang" value="${account.ukLang }"/></td>
             </tr>
             <tr>
-                <td>uk liter:</td>
+                <td><fmt:message key = "label.ukLiter" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="uk liter" value="${account.ukLiter }"/></td>
             </tr>
             <tr>
-                <td>eng:</td>
+                <td><fmt:message key = "label.eng" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="eng" value="${account.eng }"/></td>
             </tr>
             <tr>
-                <td>algebra:</td>
+                <td><fmt:message key = "label.algebra" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="algebra" value="${account.algebra }"/></td>
             </tr>
             <tr>
-                <td>informatics:</td>
+                <td><fmt:message key = "label.informatics" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="informatics" value="${account.informatics }"/></td>
             </tr>
             <tr>
-                <td>geometry:</td>
+                <td><fmt:message key = "label.geometry" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="geometry" value="${account.geometry }"/></td>
             </tr>
             <tr>
-                <td>uk history:</td>
+                <td><fmt:message key = "label.ukHistory" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="uk history" value="${account.ukHistory }"/></td>
             </tr>
             <tr>
-                <td>ph training:</td>
+                <td><fmt:message key = "label.phTraining" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="ph training" value="${account.phTraining }"/></td>
             </tr>
             <tr>
-                <td>physics:</td>
+                <td><fmt:message key = "label.physics" bundle = "${lang}"/></td>
                 <td><input type="number" max="12" min="1" required name="physics" value="${account.physics }"/></td>
             </tr>
 

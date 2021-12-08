@@ -16,7 +16,7 @@ import static java.util.Objects.nonNull;
  * Acidification filter.
  */
 
-@WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp","/edit_faculty.jsp" })
+@WebFilter(urlPatterns = { "/admin_menu.jsp","/list_user","/list_user.jsp","/edit_faculty.jsp","/final_list" })
 public class AbFilter implements Filter {
     private static final Logger logger = LogManager.getLogger(AbFilter.class);
 
@@ -42,11 +42,13 @@ public class AbFilter implements Filter {
             logger.trace(isAdmin+"inabf");
             logger.trace(req.getHeader("Referer"));
         req.getRequestDispatcher("err.jsp").forward(req, res);
+        return;
         }
         if (isAdmin==-1) {
             logger.trace(isAdmin+"inabf");
 
             req.getRequestDispatcher("login.jsp").forward(req, res);
+            return;
         }
         chain.doFilter(request, response);
     }

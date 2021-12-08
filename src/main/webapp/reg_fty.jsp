@@ -58,32 +58,32 @@
    <c:set var="eie" value="${param.eieUkLang}" scope="page"/>
    <c:if test="${ not empty eie and eie eq '1' }">
        <tr>
-           <td>eie uk lang:</td>
+           <td><fmt:message key = "label.eieUkLang" bundle = "${lang}"/></td>
            <td><input type="number" max="12" min="1" required name="eieUkLang"/></td>
        </tr>
    </c:if>
    <c:set var="eie" value="${param.eieMath}" scope="page"/>
    <c:if test="${ not empty eie and eie eq '1' }">
        <tr>
-           <td>eie math:</td>
+           <td><fmt:message key = "label.eieMath" bundle = "${lang}"/></td>
            <td><input type="number" max="12" min="1" required name="eieMath"/></td>
        </tr>
    </c:if>
    <c:set var="eie" value="${param.eiePhysics}" scope="page"/>
    <c:if test="${ not empty eie and eie eq '1' }">
        <tr>
-           <td>eie physics:</td>
+           <td><fmt:message key = "label.eiePhysics" bundle = "${lang}"/></td>
            <td><input type="number" max="12" min="1" required name="eiePhysics"/></td>
        </tr>
    </c:if>
-   <tr>
-       <td>
-           <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
-           <input type="hidden" id="facultyName" name="facultyName" value="${param.facultyName}">
-           <input type="hidden" id="command" name="command" value="${param.command}">
-           <input class="btn btn-info" type="submit" value="Реєстрація">
-       </td>
-   </tr>
+       <tr>
+           <td>
+               <input type="hidden" id="facultyId" name="facultyId" value="${param.id}">
+               <input type="hidden" id="facultyName" name="facultyName" value="${param.facultyName}">
+               <input type="hidden" id="command" name="command" value="${param.command}">
+               <input class="btn btn-info" type="submit" value="Реєстрація">
+           </td>
+       </tr>
 </form>
 </div>
 </body>
