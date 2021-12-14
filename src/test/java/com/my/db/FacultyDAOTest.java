@@ -128,4 +128,64 @@ public class FacultyDAOTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void removeFacultyTest(){
+        Faculty faculty = new Faculty();
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)){
+            PreparedStatement stat = connection.prepareStatement("INSERT INTO faculty(st_funded_places,tot_places,eie_uk_lang,eie_math,eie_physics) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
+            faculty.setStFundedPlaces(5);
+            faculty.setTotPlaces(6);
+            faculty.setIsEieUkLang(1);
+            faculty.setIsEieMath(1);
+            faculty.setIsEiePhysics(1);
+            stat.setInt(1,faculty.getStFundedPlaces());
+            stat.setInt(2,faculty.getTotPlaces());
+            stat.setInt(3,faculty.getIsEieUkLang());
+            stat.setInt(4,faculty.getIsEieMath());
+            stat.setInt(5,faculty.getIsEiePhysics());
+            stat.executeUpdate();
+            try (ResultSet generatedKeys = stat.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    faculty.setId(generatedKeys.getInt(1));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            new FacultyDAO().removeFaculty(DriverManager.getConnection(DB_URL, USER, PASS),faculty.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Faculty facultyGet = new Faculty();
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement stat = connection.prepareStatement("SELECT * FROM faculty WHERE id=?")) {
+
+
+
+            stat.setInt(1, faculty.getId());
+            try (ResultSet resultSet = stat.executeQuery()) {
+                while (resultSet.next()) {
+                    facultyGet.setId(resultSet.getInt(1));
+                    facultyGet.setStFundedPlaces(resultSet.getInt(2));
+                    facultyGet.setTotPlaces(resultSet.getInt(3));
+                    facultyGet.setIsEieUkLang(resultSet.getInt(4));
+                    facultyGet.setIsEieMath(resultSet.getInt(5));
+                    facultyGet.setIsEiePhysics(resultSet.getInt(6));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue((facultyGet.getId()).equals(0)&&
+                ((Integer)facultyGet.getStFundedPlaces()).equals(0)
+                &&((Integer)facultyGet.getTotPlaces()).equals(0)
+                &&((Integer)facultyGet.getIsEieUkLang()).equals(0)
+                &&((Integer)facultyGet.getIsEieMath()).equals(0)
+                &&((Integer)facultyGet.getIsEiePhysics()).equals(0));
+    }
 }
